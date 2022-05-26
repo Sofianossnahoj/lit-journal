@@ -1,9 +1,14 @@
+import React from "react";
 import "./sass/App.scss";
+import CreateNewEntry from "./views/CreateNewEntry";
+import HomeView from "./views/HomeView";
 
 function App() {
   return (
     <div className="App">
-      <h1>hej</h1>
+      <HomeView />
+      <br />
+      <CreateNewEntry />
     </div>
   );
 }
