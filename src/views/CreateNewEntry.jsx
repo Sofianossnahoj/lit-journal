@@ -1,5 +1,5 @@
 import React from "react";
-import Form, { JournalNote } from "../components/form";
+import JournalNote from "../components/JournalNote";
 import Header from "../components/header";
 import "../sass/views/CreateNewEntry.scss";
 
@@ -9,7 +9,6 @@ function CreateNewEntry() {
       <Header />
       <h1>SPACE FOR SEARCH BUTTON</h1>
       <JournalNote />
-      <Form />
     </main>
   );
 }
