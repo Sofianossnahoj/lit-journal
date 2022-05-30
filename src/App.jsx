@@ -5,6 +5,7 @@ import LandingPage from "./views/LandingPage";
 import HomeView from "./views/HomeView";
 import SignIn from "./components/SignIn";
 import CreateNewEntry from "./views/CreateNewEntry";
+import MenuBar from "./components/MenuBar";
 /* import ProtectedRoute from "./components/ProtectedRoute"; */
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<HomeView />} />
+
           {/*           <Route
             path="/home"
             element={
@@ -30,6 +32,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/create" element={<CreateNewEntry />} />
         </Routes>
+        <MenuBar />
       </div>
     </Router>
   );

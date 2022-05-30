@@ -2,19 +2,23 @@ import Header from "../components/Header";
 import SearchBooks from "../components/SearchBooks";
 
 import React, { useEffect, useState } from "react";
-import { collection, query, where, getDocs } from "@firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { selectUser } from "../features/userSlice";
+import { collection, query, getDocs } from "@firebase/firestore";
 import db from "../firebase/firebase";
+import { useSelector } from "react-redux";
 
 function HomeView() {
   const [entries, setEntries] = useState([]);
   // const [currentUser, setCurrentUser] = useState(null);
 
+  const currentUser = useSelector(selectUser);
+
   const usersEntries = async () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (user !== null) {
-      const uid = user.uid;
+    console.log("logs currentuser: ", currentUser);
+    // const auth = getAuth();
+    // const user = auth.currentUser;
+    if (currentUser !== null) {
+      const uid = currentUser.uid;
       const entryQuery = query(collection(db, `users/${uid}/journal-notes`));
       console.log(entryQuery);
       const querySnapshot = await getDocs(entryQuery);
@@ -47,7 +51,12 @@ function HomeView() {
       <span>
         {entries.map((val, id) => {
           console.log("logs val in template map", val.id);
-          return <p key={id}>{val.id.title}</p>;
+          return (
+            <div key={id}>
+              <p>{val.title}</p>
+              <p>{val.author}</p>
+            </div>
+          );
         })}
       </span>
       <SearchBooks />

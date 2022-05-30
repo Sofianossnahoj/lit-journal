@@ -19,7 +19,7 @@ import { login, logout, selectUser } from "../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function useFirebase() {
-  const [userName, setUserName] = useState(null);
+  // const [userName, setUserName] = useState(null);
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const auth = getAuth();
@@ -41,6 +41,7 @@ function useFirebase() {
   }, []);
 
   const handleSignIn = async () => {
+    console.log("user is prob signed in: ", userAuth);
     const googleAuthProvider = new GoogleAuthProvider();
     try {
       const userAuth = await signInWithPopup(auth, googleAuthProvider);
@@ -88,7 +89,6 @@ function useFirebase() {
   };
   return {
     handleSignIn,
-    userName,
   };
 
   /*   return (

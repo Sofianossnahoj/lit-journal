@@ -18,28 +18,28 @@ const JournalNote = () => {
     quotes: "",
   });
 
-  useEffect(() => {
-    if (userId === null) {
-      console.log("inside useeffect call.");
-      const auth = getAuth();
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // console.log(user);
-          const userId = user.uid;
+  // useEffect(() => {
+  //   if (userId === null) {
+  //     console.log("inside useeffect call.");
+  //     const auth = getAuth();
+  //     const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //       if (user) {
+  //         // console.log(user);
+  //         const userId = user.uid;
 
-          console.log("user uid from firestore: ", userId);
-          setUserId(userId);
-          // setDoc(doc(db, `users/user/${uid}/journalnotes`));
-          // console.log(newCollectionRef);
-        } else {
-          console.log("user not found");
-        }
-      });
-      return () => {
-        unsubscribe();
-      };
-    }
-  }, [userId]);
+  //         console.log("user uid from firestore: ", userId);
+  //         setUserId(userId);
+  //         // setDoc(doc(db, `users/user/${uid}/journalnotes`));
+  //         // console.log(newCollectionRef);
+  //       } else {
+  //         console.log("user not found");
+  //       }
+  //     });
+  //     return () => {
+  //       unsubscribe();
+  //     };
+  //   }
+  // }, [userId]);
 
   console.log("userId from updated state: ", userId);
 
