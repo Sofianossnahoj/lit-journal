@@ -8,6 +8,7 @@ function CreateNewEntry() {
     <main className="create-new-entry">
       <Header />
       <h1>SPACE FOR SEARCH BUTTON</h1>
+
       <JournalNote />
     </main>
   );

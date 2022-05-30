@@ -15,16 +15,6 @@ const firebaseConfig = {
   appId: "1:430383309143:web:4b78f0e828e0f1c7f29e12",
 };
 
-// death-by-firebase config
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDP8pEx78IIdYQKgAOOw3dHXp6qS7OvFbA",
-//   authDomain: "death-by-firestore.firebaseapp.com",
-//   projectId: "death-by-firestore",
-//   storageBucket: "death-by-firestore.appspot.com",
-//   messagingSenderId: "986318356367",
-//   appId: "1:986318356367:web:fdedcf5fb7425a5a2ed5fa",
-// };
-
 // Initialize Firebase
 // export const db = getFirestore(app);
 export const app = initializeApp(firebaseConfig);
