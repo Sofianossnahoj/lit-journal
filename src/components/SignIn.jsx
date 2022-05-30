@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../firebase/useFirebase";
 
-function signIn() {
+function SignIn() {
   const { handleSignIn, userName } = useFirebase();
   return (
     <div>
@@ -12,4 +12,4 @@ function signIn() {
   );
 }
 
-export default signIn;
+export default SignIn;

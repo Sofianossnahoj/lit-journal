@@ -1,14 +1,14 @@
 import Header from "../components/Header";
+import SearchBooks from "../components/SearchBooks";
 
 import React, { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "@firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { auth } from "../firebase/firebase";
 import db from "../firebase/firebase";
 
 function HomeView() {
   const [entries, setEntries] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(null);
 
   const usersEntries = async () => {
     const auth = getAuth();
@@ -50,6 +50,7 @@ function HomeView() {
           return <p key={id}>{val.id.title}</p>;
         })}
       </span>
+      <SearchBooks />
     </section>
   );
 }

@@ -5,7 +5,7 @@ import LandingPage from "./views/LandingPage";
 import HomeView from "./views/HomeView";
 import SignIn from "./components/SignIn";
 import CreateNewEntry from "./views/CreateNewEntry";
-import ProtectedRoute from "./components/ProtectedRoute";
+/* import ProtectedRoute from "./components/ProtectedRoute"; */
 
 function App() {
   return (
@@ -18,14 +18,15 @@ function App() {
         </nav>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route
+          <Route path="/home" element={<HomeView />} />
+          {/*           <Route
             path="/home"
             element={
               <ProtectedRoute>
                 <HomeView />
               </ProtectedRoute>
               }
-          />
+          /> */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/create" element={<CreateNewEntry />} />
         </Routes>

@@ -1,12 +1,14 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate } from "react-router-dom";
+import { useUserAuth } from "../firebase/useFirebase";
 
-const ProtectedRoute = () => {
-  const user = false;
+const ProtectedRoute = ({ children }) => {
+  const userName = useUserAuth();
+  console.log("Check user in private: ", userName);
 
-  if (!user) {
-    console.log('Nope!')
+  if (!userName) {
     return <Navigate to="/" />;
   }
-}
+  return children;
+};
 
-export default ProtectedRoute
+export default ProtectedRoute;
