@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import useFirebase from "../firebase/useFirebase";
 
 function SignIn() {
   const { handleSignIn, user } = useFirebase();
+
   return (
     <div>
       <p>Sign in by clicking on the button</p>

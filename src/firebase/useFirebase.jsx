@@ -4,6 +4,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import {
   query,
@@ -20,13 +21,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 function useFirebase() {
   // const [userName, setUserName] = useState(null);
-  // const user = useSelector(selectUser);
+  const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
+  
   const auth = getAuth();
+  const googleAuthProvider = new GoogleAuthProvider();
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
-      console.log("inside useeffect userAuth: ", userAuth);
+      // console.log("inside useeffect userAuth: ", userAuth);
       if (userAuth) {
         dispatch(
           login({
@@ -41,8 +44,8 @@ function useFirebase() {
     });
   }, []);
 
+  // Prevent from firing on reload
   const handleSignIn = async () => {
-    const googleAuthProvider = new GoogleAuthProvider();
     try {
       const userAuth = await signInWithPopup(auth, googleAuthProvider);
       if (userAuth !== null) {
@@ -54,20 +57,8 @@ function useFirebase() {
           })
         );
       }
-      /*         .then(
-        (userAuth) => {
-          dispatch(
-            login({
-              email: userAuth.email,
-              uid: userAuth.uid,
-              displayName: userAuth.displayName,
-            })
-          );
-        }
-      );
-      console.log(result); */
       const user = userAuth.user;
-      console.log(userAuth);
+      //console.log(userAuth);
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const docs = await getDocs(q);
       if (docs.docs.length === 0) {
@@ -88,8 +79,27 @@ function useFirebase() {
       console.log("Error: ", error);
     }
   };
+
+  // Prevent from firing twice
+  const handleSignOut = async () => {
+    try {
+      if (currentUser !== null) {
+        const auth = getAuth();
+        await signOut(auth);
+
+        dispatch(logout());
+        console.log('Dispatch logout and auth signout was fired');
+      } else {
+        console.log('User already signed out');
+      }
+    } catch (error) {
+      console.log('Error: ', error)
+    }
+  };
+
   return {
     handleSignIn,
+    handleSignOut
   };
 
   /*   return (
