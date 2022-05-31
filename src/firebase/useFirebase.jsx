@@ -15,12 +15,11 @@ import {
   setDoc,
 } from "firebase/firestore";
 import db from "../firebase/firebase";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { login, logout, selectUser } from "../features/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function useFirebase() {
-  // const [userName, setUserName] = useState(null);
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
   

@@ -1,11 +1,12 @@
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { useUserAuth } from "../firebase/useFirebase";
+import { selectUser } from "../features/userSlice";
 
 const ProtectedRoute = ({ children }) => {
-  const userName = useUserAuth();
-  console.log("Check user in private: ", userName);
+  const currentUser = useSelector(selectUser)
+  //console.log("Check user in private: ", currentUser);
 
-  if (!userName) {
+  if (!currentUser) {
     return <Navigate to="/" />;
   }
   return children;
