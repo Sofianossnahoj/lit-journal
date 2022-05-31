@@ -3,9 +3,16 @@ import SearchBooks from "../components/SearchBooks";
 
 import React, { useEffect, useState } from "react";
 import { selectUser } from "../features/userSlice";
-import { collection, query, getDocs } from "@firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  doc,
+  deleteDoc,
+} from "@firebase/firestore";
 import db from "../firebase/firebase";
 import { useSelector } from "react-redux";
+//import { handleDelete } from "../hooks/deleteHook";
 
 function HomeView() {
   const [entries, setEntries] = useState([]);
@@ -40,6 +47,12 @@ function HomeView() {
     usersEntries();
   }, []);
 
+  // Must update after deletion
+  const handleDelete = async (id) => {
+    const docRef = doc(db, `users/${currentUser.uid}/journal-notes`, id);
+    await deleteDoc(docRef);
+  };
+
   return (
     <section>
       <Header />
@@ -55,6 +68,7 @@ function HomeView() {
             <div key={id}>
               <p>{val.title}</p>
               <p>{val.author}</p>
+              <button onClick={() => handleDelete(val.id)}>Delete</button>
             </div>
           );
         })}
