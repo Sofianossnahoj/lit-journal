@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, query, getDocs } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
+import { Link } from "react-router-dom";
 
 const JournalNote = () => {
   // const [userId, setUserId] = useState(null);
@@ -168,9 +169,13 @@ const JournalNote = () => {
             id="quotes"
             name="quotes"
           />
-          <button className="button-save" onClick={handleSubmit}>
-            Save entry
-          </button>
+          <Link to="/home">
+            <button
+              className="button-save"
+              onClick={handleSubmit}>
+                Save Entry
+            </button>
+          </Link>
         </section>
       </form>
     </section>
