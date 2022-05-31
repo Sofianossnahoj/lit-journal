@@ -30,7 +30,14 @@ const SearchBooks = () => {
       <p>{book.description}</p>
       {/* <p>{book.readingModes}</p> */}
       {/* Lägg in defaultbild som tomt värde */}
-      <img src={book.imageUrl ? book.imageUrl.thumbnail : ""} alt="test" />
+      {!book.imageUrl ? (
+        <p> bild saknas</p>
+      ) : (
+        <img
+          src={book.imageUrl ? book.imageUrl.thumbnail : ""}
+          alt="Cover image"
+        />
+      )}
     </article>
   ));
 

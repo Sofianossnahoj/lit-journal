@@ -20,12 +20,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 function useFirebase() {
   // const [userName, setUserName] = useState(null);
-  const user = useSelector(selectUser);
+  // const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const auth = getAuth();
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
+      console.log("inside useeffect userAuth: ", userAuth);
       if (userAuth) {
         dispatch(
           login({
@@ -41,7 +42,6 @@ function useFirebase() {
   }, []);
 
   const handleSignIn = async () => {
-    console.log("user is prob signed in: ", userAuth);
     const googleAuthProvider = new GoogleAuthProvider();
     try {
       const userAuth = await signInWithPopup(auth, googleAuthProvider);
@@ -67,6 +67,7 @@ function useFirebase() {
       );
       console.log(result); */
       const user = userAuth.user;
+      console.log(userAuth);
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
       const docs = await getDocs(q);
       if (docs.docs.length === 0) {
