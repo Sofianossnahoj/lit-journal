@@ -1,37 +1,46 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./sass/App.scss";
 import LandingPage from "./views/LandingPage";
 import HomeView from "./views/HomeView";
-import SignIn from "./components/SignIn";
 import CreateNewEntry from "./views/CreateNewEntry";
+import SearchResults from "./views/SearchResults";
 import MenuBar from "./components/MenuBar";
+import ProtectedRoute from "./components/ProtectedRoute";
 /* import ProtectedRoute from "./components/ProtectedRoute"; */
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <Link to="/home">Home</Link>
-          <Link to="/signin">Sign In</Link>
-          <Link to="/create">Create New Entry</Link>
-        </nav>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<HomeView />} />
-
-          {/*           <Route
+          <Route
             path="/home"
             element={
               <ProtectedRoute>
                 <HomeView />
               </ProtectedRoute>
-              }
-          /> */}
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/create" element={<CreateNewEntry />} />
+            }
+          />
+          <Route
+            path="/create"
+            element={
+              <ProtectedRoute>
+                <CreateNewEntry />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/search"
+            element={
+              <ProtectedRoute>
+                <SearchResults />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
+        {/* Look to make this not appear on LandingPage */}
         <MenuBar />
       </div>
     </Router>
