@@ -45,9 +45,9 @@ function useFirebase() {
 
   // Prevent from firing on reload
   const handleSignIn = async () => {
-    try {
-      const userAuth = await signInWithPopup(auth, googleAuthProvider);
-      if (userAuth !== null) {
+    if (currentUser === null) {
+      try {
+        const userAuth = await signInWithPopup(auth, googleAuthProvider);
         dispatch(
           login({
             email: userAuth.user.email,
@@ -55,7 +55,6 @@ function useFirebase() {
             displayName: userAuth.user.displayName,
           })
         );
-      }
       const user = userAuth.user;
       //console.log(userAuth);
       const q = query(collection(db, "users"), where("uid", "==", user.uid));
@@ -74,8 +73,11 @@ function useFirebase() {
           email: user.email,
         });
       }
-    } catch (error) {
-      console.log("Error: ", error);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    } else {
+      console.log('Can not log in again')
     }
   };
 
