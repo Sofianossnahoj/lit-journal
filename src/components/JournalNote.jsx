@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import db from "../firebase/firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { collection, query, getDocs } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 const JournalNote = () => {
-  const [userId, setUserId] = useState(null);
+  // const [userId, setUserId] = useState(null);
   const [journalNote, setJournalNote] = useState({
     title: "",
     author: "",
@@ -18,30 +20,30 @@ const JournalNote = () => {
     quotes: "",
   });
 
-  useEffect(() => {
-    if (userId === null) {
-      console.log("inside useeffect call.");
-      const auth = getAuth();
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // console.log(user);
-          const userId = user.uid;
+  const currentUser = useSelector(selectUser);
 
-          console.log("user uid from firestore: ", userId);
-          setUserId(userId);
-          // setDoc(doc(db, `users/user/${uid}/journalnotes`));
-          // console.log(newCollectionRef);
-        } else {
-          console.log("user not found");
-        }
-      });
-      return () => {
-        unsubscribe();
-      };
-    }
-  }, [userId]);
+  // useEffect(() => {
+  //   if (userId === null) {
+  //     console.log("inside useeffect call.");
+  //     const auth = getAuth();
+  //     const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //       if (user) {
+  //         // console.log(user);
+  //         const userId = user.uid;
 
-  console.log("userId from updated state: ", userId);
+  //         console.log("user uid from firestore: ", userId);
+  //         setUserId(userId);
+  //         // setDoc(doc(db, `users/user/${uid}/journalnotes`));
+  //         // console.log(newCollectionRef);
+  //       } else {
+  //         console.log("user not found");
+  //       }
+  //     });
+  //     return () => {
+  //       unsubscribe();
+  //     };
+  //   }
+  // }, [userId]);
 
   const handleChange = (event) => {
     setJournalNote({
@@ -52,6 +54,8 @@ const JournalNote = () => {
 
   const handleSubmit = async () => {
     const q = query(collection(db, "users"));
+    console.log("handleSub curentUser: ", currentUser);
+    const userId = currentUser.uid;
     const querySnapshot = await getDocs(q);
     const queryData = querySnapshot.docs.map((journalNote) => ({
       ...journalNote.data(),

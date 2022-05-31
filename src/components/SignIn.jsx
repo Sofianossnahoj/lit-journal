@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../firebase/useFirebase";
 
-function signIn() {
-  const { handleSignIn, userName } = useFirebase();
+function SignIn() {
+  const { handleSignIn, user } = useFirebase();
   return (
     <div>
       <p>Sign in by clicking on the button</p>
       <button onClick={handleSignIn}>Sign In</button>
-      {userName}
+      {user}
     </div>
   );
 }
 
-export default signIn;
+export default SignIn;
