@@ -1,16 +1,15 @@
 import React from "react";
-import { logout } from "../features/userSlice";
-import { useDispatch } from "react-redux";
+import useFirebase from "../firebase/useFirebase";
 
 function SignOut() {
-  const dispatch = useDispatch();
+  const { handleSignOut, user } = useFirebase();
 
-  const handleSignOut = async () => {
-    dispatch(logout());
-    console.log("dispatch log out fired");
-  };
-
-  return <button onClick={handleSignOut}>Sign Out</button>;
+  return (
+    <div>
+      <button onClick={handleSignOut}>Sign Out</button>
+      {user}
+    </div>
+  );
 }
 
 export default SignOut;

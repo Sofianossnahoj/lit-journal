@@ -5,7 +5,7 @@ function MenuBar() {
   return (
     <nav>
       <button>hem</button>
-      <button>serach</button>
+      <button>search</button>
       <SignOut />
     </nav>
   );

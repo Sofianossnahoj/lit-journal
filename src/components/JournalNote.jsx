@@ -61,7 +61,7 @@ const JournalNote = () => {
       ...journalNote.data(),
       id: journalNote.id,
     }));
-    console.log(queryData);
+    console.log(                                                                      );
     queryData.map(async () => {
       await setDoc(
         doc(db, `users/${userId}/journal-notes`, journalNote.title),
@@ -79,6 +79,7 @@ const JournalNote = () => {
       );
     });
   };
+  
   return (
     <section>
       <h1>Create a journal note</h1>
