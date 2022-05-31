@@ -1,14 +1,16 @@
 import React from "react";
 import useFirebase from "../firebase/useFirebase";
+import GoogleButton from 'react-google-button';
 
 function SignIn() {
-  const { handleSignIn, user } = useFirebase();
+  const { handleSignIn } = useFirebase();
 
   return (
     <div>
-      <p>Sign in by clicking on the button</p>
-      <button onClick={handleSignIn}>Sign In</button>
-      {user}
+      <GoogleButton
+      type="light"
+      onClick={handleSignIn}
+      />
     </div>
   );
 }
