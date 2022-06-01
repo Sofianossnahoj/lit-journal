@@ -6,7 +6,6 @@ import HomeView from "./views/HomeView";
 import CreateNewEntry from "./views/CreateNewEntry";
 import SearchResults from "./views/SearchResults";
 import ProtectedRoute from "./components/ProtectedRoute";
-import MenuBar from "./components/MenuBar";
 
 function App() {
   return (
@@ -39,8 +38,6 @@ function App() {
             }
           />
         </Routes>
-        {/* Look to make this not appear on LandingPage */}
-        <MenuBar />
       </div>
     </Router>
   );

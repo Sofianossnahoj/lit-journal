@@ -12,6 +12,7 @@ import {
 } from "@firebase/firestore";
 import Header from "../components/Header";
 import SearchBooks from "../components/SearchBooks";
+import MenuBar from "../components/MenuBar";
 
 function HomeView() {
   const entries = useSelector(getEntries);
@@ -76,6 +77,7 @@ function HomeView() {
         })}
       </span>
       <SearchBooks />
+      <MenuBar />
     </section>
   );
 }

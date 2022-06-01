@@ -1,8 +1,11 @@
-import React from 'react'
+import MenuBar from "../components/MenuBar";
 
 const BookDetails = () => {
   return (
-    <div>BookDetails</div>
+    <div>
+      <p>BookDetails</p>
+      <MenuBar />
+    </div>
   )
 }
 

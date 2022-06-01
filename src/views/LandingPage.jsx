@@ -1,6 +1,8 @@
+import "../sass/views/landingPage.scss";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
+import Header from "../components/header";
 import SignIn from "../components/SignIn";
 
 function LandingPage() {
@@ -11,10 +13,13 @@ function LandingPage() {
   }
 
   return (
-    <section className="landing">
-      <p>Welcome to LITerature Journal</p>
-      <SignIn />
-    </section>
+    <main className="landing-page">
+      <section className="content-box">
+        <h4>Welcome to</h4>
+        <Header />
+        <SignIn />
+      </section>
+    </main>
   );
 }
 

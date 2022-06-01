@@ -8,8 +8,8 @@ function SignIn() {
   return (
     <div>
       <GoogleButton
-      type="light"
-      onClick={handleSignIn}
+        type="light"
+        onClick={handleSignIn}
       />
     </div>
   );
