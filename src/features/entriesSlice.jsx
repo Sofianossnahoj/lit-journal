@@ -8,21 +8,26 @@ export const entriesSlice = createSlice({
   },
   reducers: {
     setEntries: (state, action) => {
-      state.entries = action.payload;
+     state.entries = action.payload;
     },
     createEntry: (state, action) => {
       const newEntry = produce(state, (draftEntry) => {
         draftEntry.entries.push(action.payload);
       });
       return newEntry;
+    },
+    deleteEntry: (state, action) => {
+        const removeEntry = produce(state, (draftDelete) => {
+        draftDelete.entries.slice(action.payload);
+        });
+      return removeEntry
     }
-    /* deleteEntry */
-    /* editEntry */
   }
-})
+  /* editEntry */
+});
 
 export const getEntries = (state) => state.entriesState.entries;
 
-export const { setEntries, createEntry } = entriesSlice.actions;
+export const { setEntries, createEntry, deleteEntry } = entriesSlice.actions;
 
 export default entriesSlice.reducer;

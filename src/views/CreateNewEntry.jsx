@@ -1,7 +1,7 @@
 import React from "react";
+import "../sass/views/CreateNewEntry.scss";
 import JournalNote from "../components/JournalNote";
 import Header from "../components/header";
-import "../sass/views/CreateNewEntry.scss";
 
 function CreateNewEntry() {
   return (

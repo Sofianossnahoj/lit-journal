@@ -34,6 +34,7 @@ export const fetchBooks = createAsyncThunk(
 const booksSlice = createSlice({
   name: "books",
   initialState,
+  // Does this reducer do anything?
   reducers: {
     bookAdded: {
       reducer(state, action) {

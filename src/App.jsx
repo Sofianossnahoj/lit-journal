@@ -1,12 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./sass/App.scss";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./views/LandingPage";
 import HomeView from "./views/HomeView";
 import CreateNewEntry from "./views/CreateNewEntry";
 import SearchResults from "./views/SearchResults";
-import MenuBar from "./components/MenuBar";
 import ProtectedRoute from "./components/ProtectedRoute";
+import MenuBar from "./components/MenuBar";
 
 function App() {
   return (

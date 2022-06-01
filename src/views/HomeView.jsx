@@ -1,7 +1,8 @@
-import Header from "../components/Header";
-import SearchBooks from "../components/SearchBooks";
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
 import { selectUser } from "../features/userSlice";
+import db from "../firebase/firebase";
 import {
   collection,
   query,
@@ -9,9 +10,8 @@ import {
   doc,
   deleteDoc,
 } from "@firebase/firestore";
-import db from "../firebase/firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { setEntries, getEntries } from "../features/entriesSlice";
+import Header from "../components/Header";
+import SearchBooks from "../components/SearchBooks";
 
 function HomeView() {
   const entries = useSelector(getEntries);
@@ -48,10 +48,11 @@ function HomeView() {
     usersEntries();
   }, []);
 
-  // Must update after deletion
   const handleDelete = async (id) => {
     const docRef = doc(db, `users/${currentUser.uid}/journal-notes`, id);
-    await deleteDoc(docRef);
+    const deletedItem = await deleteDoc(docRef);
+    dispatch(deleteEntry(deletedItem));
+    usersEntries();
   };
 
   return (

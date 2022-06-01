@@ -1,11 +1,10 @@
-import { doc, setDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import db from "../firebase/firebase";
-import { collection, query, getDocs } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux";
-import { selectUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
+import db from "../firebase/firebase";
+import { collection, query, getDocs, doc, setDoc } from "firebase/firestore";
 import { createEntry } from "../features/entriesSlice";
+import { selectUser } from "../features/userSlice";
 
 const JournalNote = () => {
   const [journalNote, setJournalNote] = useState({
@@ -52,19 +51,14 @@ const JournalNote = () => {
           sequel: journalNote.sequel,
           quotes: journalNote.quotes,
         }
-    await queryData.map(async () => {
-      await setDoc(
+    queryData.map(() => {
+      setDoc(
         doc(db, `users/${userId}/journal-notes`, journalNote.title),
         newEntryData
       );
     });
-    dispatch(createEntry(newEntryData))
+    dispatch(createEntry(newEntryData));
     navigate('/home', { replace: true });
-    /* För att uppdatera: */
-    /*   1. Uppdatera state variabeln manuellt
-      2. Hämta allt igen? */
-    /* Måste ligga nära i komponentträdet */
-    /* Lägg variabeln i app.jsx */
   };
   
   return (

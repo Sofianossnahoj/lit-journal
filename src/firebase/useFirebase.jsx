@@ -1,4 +1,5 @@
-import { app } from "./firebase";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   getAuth,
   signInWithPopup,
@@ -6,18 +7,15 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import db from "../firebase/firebase";
 import {
   query,
   getDocs,
   collection,
   where,
   addDoc,
-  setDoc,
 } from "firebase/firestore";
-import db from "../firebase/firebase";
-import { useEffect } from "react";
 import { login, logout, selectUser } from "../features/userSlice";
-import { useDispatch, useSelector } from "react-redux";
 
 function useFirebase() {
   const currentUser = useSelector(selectUser);
