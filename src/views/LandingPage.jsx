@@ -8,8 +8,6 @@ function LandingPage() {
 
   if (currentUser !== null) {
     return <Navigate to="/home" />;
-  } else {
-    console.log('fuck this shit')
   }
 
   return (

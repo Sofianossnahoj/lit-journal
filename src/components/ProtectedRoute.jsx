@@ -3,8 +3,7 @@ import { Navigate } from "react-router-dom";
 import { selectUser } from "../features/userSlice";
 
 const ProtectedRoute = ({ children }) => {
-  const currentUser = useSelector(selectUser)
-  //console.log("Check user in private: ", currentUser);
+  const currentUser = useSelector(selectUser);
 
   if (!currentUser) {
     return <Navigate to="/" />;

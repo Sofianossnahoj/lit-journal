@@ -16,21 +16,8 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login, logout } = userSlice.actions;
-
 export const selectUser = (state) => state.currentUser.user;
 
+export const { login, logout } = userSlice.actions;
+
 export default userSlice.reducer;
-
-/* const initialState = null
-
-const userSlice = createSlice({
-  name: 'userName',
-  initialState,
-  reducer: {},
-  extraReducers(builder) {
-    builder.addCase(functionname.fulfilled, (state, action) => {
-      return action.payload
-    })
-  }
-}) */

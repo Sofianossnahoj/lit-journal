@@ -7,7 +7,6 @@ import CreateNewEntry from "./views/CreateNewEntry";
 import SearchResults from "./views/SearchResults";
 import MenuBar from "./components/MenuBar";
 import ProtectedRoute from "./components/ProtectedRoute";
-/* import ProtectedRoute from "./components/ProtectedRoute"; */
 
 function App() {
   return (
