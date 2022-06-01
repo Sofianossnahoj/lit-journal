@@ -1,14 +1,12 @@
-import { doc, setDoc } from "firebase/firestore";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import db from "../firebase/firebase";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { collection, query, getDocs } from "firebase/firestore";
-import { useSelector } from "react-redux";
+import { collection, query, getDocs, doc, setDoc } from "firebase/firestore";
+import { createEntry } from "../features/entriesSlice";
 import { selectUser } from "../features/userSlice";
-import { Link } from "react-router-dom";
 
 const JournalNote = () => {
-  // const [userId, setUserId] = useState(null);
   const [journalNote, setJournalNote] = useState({
     title: "",
     author: "",
@@ -22,29 +20,9 @@ const JournalNote = () => {
   });
 
   const currentUser = useSelector(selectUser);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (userId === null) {
-  //     console.log("inside useeffect call.");
-  //     const auth = getAuth();
-  //     const unsubscribe = onAuthStateChanged(auth, (user) => {
-  //       if (user) {
-  //         // console.log(user);
-  //         const userId = user.uid;
-
-  //         console.log("user uid from firestore: ", userId);
-  //         setUserId(userId);
-  //         // setDoc(doc(db, `users/user/${uid}/journalnotes`));
-  //         // console.log(newCollectionRef);
-  //       } else {
-  //         console.log("user not found");
-  //       }
-  //     });
-  //     return () => {
-  //       unsubscribe();
-  //     };
-  //   }
-  // }, [userId]);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setJournalNote({
@@ -62,11 +40,7 @@ const JournalNote = () => {
       ...journalNote.data(),
       id: journalNote.id,
     }));
-    console.log(                                                                      );
-    queryData.map(async () => {
-      await setDoc(
-        doc(db, `users/${userId}/journal-notes`, journalNote.title),
-        {
+    const newEntryData = {
           title: journalNote.title,
           author: journalNote.author,
           genre: journalNote.genre,
@@ -77,8 +51,14 @@ const JournalNote = () => {
           sequel: journalNote.sequel,
           quotes: journalNote.quotes,
         }
+    queryData.map(() => {
+      setDoc(
+        doc(db, `users/${userId}/journal-notes`, journalNote.title),
+        newEntryData
       );
     });
+    dispatch(createEntry(newEntryData));
+    navigate('/home', { replace: true });
   };
   
   return (
@@ -169,13 +149,11 @@ const JournalNote = () => {
             id="quotes"
             name="quotes"
           />
-          <Link to="/home">
             <button
               className="button-save"
               onClick={handleSubmit}>
                 Save Entry
             </button>
-          </Link>
         </section>
       </form>
     </section>

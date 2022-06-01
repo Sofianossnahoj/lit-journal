@@ -1,4 +1,3 @@
-import React from "react";
 import "../sass/components/header.scss";
 
 function Header() {

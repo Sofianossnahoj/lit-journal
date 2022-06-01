@@ -1,8 +1,8 @@
-import Header from "../components/Header";
-import SearchBooks from "../components/SearchBooks";
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
 import { selectUser } from "../features/userSlice";
+import db from "../firebase/firebase";
 import {
   collection,
   query,
@@ -10,18 +10,16 @@ import {
   doc,
   deleteDoc,
 } from "@firebase/firestore";
-import db from "../firebase/firebase";
-import { useSelector } from "react-redux";
-//import { handleDelete } from "../hooks/deleteHook";
+import Header from "../components/Header";
+import SearchBooks from "../components/SearchBooks";
 
 function HomeView() {
-  const [entries, setEntries] = useState([]);
-  // const [currentUser, setCurrentUser] = useState(null);
-
+  const entries = useSelector(getEntries);
   const currentUser = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const usersEntries = async () => {
-    console.log("logs currentuser: ", currentUser);
+    // console.log("logs currentuser: ", currentUser);
     // const auth = getAuth();
     // const user = auth.currentUser;
     if (currentUser !== null) {
@@ -33,24 +31,28 @@ function HomeView() {
         ...doc.data(),
         id: doc.id,
       }));
-      setEntries(data);
-      console.log(data);
-      console.log(entries);
+    
+      dispatch(setEntries(data));
+
+      // setEntries(data);
+      // console.log(data);
+      // console.log(entries);
     }
     // let currentUserId = firebase.auth().currentUser;
     // setCurrentUser(currentUserId);
 
-    console.log(entries);
+    // console.log(entries);
   };
 
   useEffect(() => {
     usersEntries();
   }, []);
 
-  // Must update after deletion
   const handleDelete = async (id) => {
     const docRef = doc(db, `users/${currentUser.uid}/journal-notes`, id);
-    await deleteDoc(docRef);
+    const deletedItem = await deleteDoc(docRef);
+    dispatch(deleteEntry(deletedItem));
+    usersEntries();
   };
 
   return (
@@ -63,7 +65,7 @@ function HomeView() {
       <h2>testar att loopa ut från användares info från firestore</h2>
       <span>
         {entries.map((val, id) => {
-          console.log("logs val in template map", val.id);
+          // console.log("logs val in template map", val.id);
           return (
             <div key={id}>
               <p>{val.title}</p>
