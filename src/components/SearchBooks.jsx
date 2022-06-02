@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "../sass/components/searchBooks.scss";
 import { useSelector, useDispatch } from "react-redux";
 import {
   selectAllBooks,
@@ -25,19 +26,20 @@ const SearchBooks = () => {
 
   const renderedBooks = books.map((book) => (
     <article className="book-list-card" key={book.id}>
-      <h3>{book.title}</h3>
-      <p>{book.authors}</p>
-      <p>{book.description}</p>
-      {/* <p>{book.readingModes}</p> */}
-      {/* Lägg in defaultbild som tomt värde */}
       {!book.imageUrl ? (
-        <p> bild saknas</p>
+        <p>bild saknas</p>
       ) : (
         <img
+          className="search-image"
           src={book.imageUrl ? book.imageUrl.thumbnail : ""}
           alt="Cover image"
         />
       )}
+      <h4>{book.title}</h4>
+      <p>{book.authors}</p>
+      <p>{book.description}</p>
+      {/* <p>{book.readingModes}</p> */}
+      {/* Lägg in defaultbild som tomt värde */}
     </article>
   ));
 
@@ -53,7 +55,7 @@ const SearchBooks = () => {
   }
 
   return (
-    <section>
+    <section className="search-books">
       <SearchBar data={books} />
       <article>{bookContent}</article>
     </section>

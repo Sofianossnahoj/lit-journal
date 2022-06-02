@@ -1,11 +1,15 @@
+import "../sass/views/searchResults.scss";
+import SearchBooks from "../components/SearchBooks";
 import MenuBar from "../components/MenuBar";
 
 const SearchResults = () => {
   return (
-    <div>
-      <h1>SearchResults</h1>
+    <main className="search-results">
+      <h2>LITerature Journal</h2>
+      <div className="hr" />
+      <SearchBooks />
       <MenuBar />
-    </div>
+    </main>
   )
 }
 

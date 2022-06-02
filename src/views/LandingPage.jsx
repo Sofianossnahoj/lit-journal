@@ -15,7 +15,7 @@ function LandingPage() {
   return (
     <main className="landing-page">
       <section className="content-box">
-        <h4>Welcome to</h4>
+        <h3>Welcome to</h3>
         <Header />
         <SignIn />
       </section>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "../sass/views/homeView.scss"
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
 import { selectUser } from "../features/userSlice";
 import db from "../firebase/firebase";
@@ -11,8 +12,7 @@ import {
   doc,
   deleteDoc,
 } from "@firebase/firestore";
-import Header from "../components/Header";
-import SearchBooks from "../components/SearchBooks";
+import SearchBar from "../components/SearchBar";
 import MenuBar from "../components/MenuBar";
 
 function HomeView() {
@@ -58,11 +58,13 @@ function HomeView() {
   };
 
   return (
-    <section className="home-view">
-      <Header />
+    <main className="home-view">
+      <h2>LITerature Journal</h2>
+      <div className="hr" />
+      <SearchBar />
       <h5>You don't have any journal entries yet!</h5>
 
-      <button>Create New Entry</button>
+      <Link to="/create"><button>Create New Entry</button></Link>
 
       <h2>testar att loopa ut från användares info från firestore</h2>
       <h1>Testing space</h1>
@@ -78,9 +80,8 @@ function HomeView() {
           );
         })}
       </span>
-      <SearchBooks />
       <MenuBar />
-    </section>
+    </main>
   );
 }
 

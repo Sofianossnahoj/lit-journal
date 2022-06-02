@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../sass/components/searchBar.scss";
 import { useDispatch } from "react-redux";
 import { fetchBooks } from "../features/booksSlice";
 
@@ -22,8 +23,9 @@ function SearchBar() {
     <article className="search-bar">
       <form onSubmit={handleSearch}>
         <input
+          className="search-bar-text"
           type="text"
-          placeholder="Search books"
+          placeholder="Search for books or authors"
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
         />

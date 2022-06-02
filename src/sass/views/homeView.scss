@@ -1,5 +1,12 @@
+@import "../mixins";
+@import "../variables";
+
 .home-view {
   position: relative;
   height: 100vh;
   width: 100vw;
+
+/*   button {
+    @include button;
+  } */
 }

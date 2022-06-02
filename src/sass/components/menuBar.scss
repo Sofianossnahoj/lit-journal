@@ -1,12 +1,14 @@
 @import "../typography";
+@import "../variables";
 
 nav {
+  background-color: $cremeWhite;
   position: sticky;
   bottom: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: row;
-/*   flex-grow: 1; */
+  padding: 0.5em;
 
   .menu-button {
     display: flex;

@@ -6,16 +6,22 @@ function MenuBar() {
   return (
     <nav>
       <Link to="/home">
-        <button className="menu-button">
+        <article className="menu-button">
           <img src="src/images/house-grey.png" alt="home" className="menu-icons" />
-          Home
-        </button>
+          <p className="menu-button-text">Home</p>
+        </article>
+      </Link>
+      <Link to="/create">
+        <article className="menu-button">
+          <img src="src/images/pen-grey.png" alt="home" className="menu-icons" />
+          <p className="menu-button-text">Create Entry</p>
+        </article>
       </Link>
       <Link to="/search">
-        <button className="menu-button">
+        <article className="menu-button">
           <img src="src/images/magnifying-glass-grey.png" alt="search" className="menu-icons" />
-          Search
-        </button>
+          <p className="menu-button-text">Search</p>
+        </article>
       </Link>
       <Link to="/">
         <SignOut />
