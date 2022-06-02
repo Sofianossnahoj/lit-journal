@@ -1,7 +1,8 @@
 @import "../typography";
 
 nav {
-  width: 100vw;
+  position: sticky;
+  bottom: 0;
   display: flex;
   justify-content: center;
   flex-direction: row;

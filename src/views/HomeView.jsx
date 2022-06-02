@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "../sass/views/homeView.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
 import { selectUser } from "../features/userSlice";
@@ -57,13 +58,14 @@ function HomeView() {
   };
 
   return (
-    <section>
+    <section className="home-view">
       <Header />
       <h5>You don't have any journal entries yet!</h5>
 
       <button>Create New Entry</button>
 
       <h2>testar att loopa ut från användares info från firestore</h2>
+      <h1>Testing space</h1>
       <span>
         {entries.map((val, id) => {
           // console.log("logs val in template map", val.id);
