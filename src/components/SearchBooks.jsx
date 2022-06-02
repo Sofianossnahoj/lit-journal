@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import "../sass/components/searchBooks.scss";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   selectAllBooks,
   getBooksStatus,
@@ -11,6 +12,7 @@ import SearchBar from "./SearchBar";
 
 const SearchBooks = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const bookTitle = "";
 
@@ -23,6 +25,11 @@ const SearchBooks = () => {
       dispatch(fetchBooks());
     }
   }, [booksStatus, dispatch]);
+
+  const test = (book) => {
+    console.log("test i searchbooks.jsx", book.authors);
+    navigate("/create", { replace: true });
+  };
 
   const renderedBooks = books.map((book) => (
     <article className="book-list-card" key={book.id}>
@@ -37,7 +44,10 @@ const SearchBooks = () => {
       )}
       <h4>{book.title}</h4>
       <p>{book.authors}</p>
-      <p>{book.description}</p>
+      <button onClick={() => test(book)}>Create new note</button>
+      <br />
+
+      {/* <p>{book.description}</p> */}
       {/* <p>{book.readingModes}</p> */}
       {/* Lägg in defaultbild som tomt värde */}
     </article>

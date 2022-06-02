@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import "../sass/views/homeView.scss"
+import "../sass/views/homeView.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
 import { selectUser } from "../features/userSlice";
 import db from "../firebase/firebase";
@@ -18,6 +18,8 @@ import MenuBar from "../components/MenuBar";
 function HomeView() {
   const entries = useSelector(getEntries);
   const currentUser = useSelector(selectUser);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const usersEntries = async () => {
@@ -33,7 +35,7 @@ function HomeView() {
         ...doc.data(),
         id: doc.id,
       }));
-    
+
       dispatch(setEntries(data));
 
       // setEntries(data);
@@ -57,14 +59,23 @@ function HomeView() {
     usersEntries();
   };
 
+  const test = () => {
+    console.log("test");
+    navigate("/search", { replace: true });
+  };
+
   return (
     <main className="home-view">
       <h2>LITerature Journal</h2>
       <div className="hr" />
-      <SearchBar />
+      <div onClick={test}>
+        <SearchBar />
+      </div>
       <h5>You don't have any journal entries yet!</h5>
 
-      <Link to="/create"><button>Create New Entry</button></Link>
+      <Link to="/create">
+        <button>Create New Entry</button>
+      </Link>
 
       <h2>testar att loopa ut från användares info från firestore</h2>
       <h1>Testing space</h1>

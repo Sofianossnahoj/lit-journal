@@ -1,16 +1,16 @@
 import "../sass/views/searchResults.scss";
 import SearchBooks from "../components/SearchBooks";
 import MenuBar from "../components/MenuBar";
+import Header from "../components/header";
 
 const SearchResults = () => {
   return (
     <main className="search-results">
-      <h2>LITerature Journal</h2>
-      <div className="hr" />
+      <Header />
       <SearchBooks />
       <MenuBar />
     </main>
-  )
-}
+  );
+};
 
-export default SearchResults
+export default SearchResults;
