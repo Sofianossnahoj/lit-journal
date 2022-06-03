@@ -25,6 +25,7 @@ export const fetchBooks = createAsyncThunk(
         description: item.volumeInfo.description,
         imageUrl: item.volumeInfo.imageLinks,
         infoLink: item.volumeInfo.infoLink,
+        pubDate: item.volumeInfo.publishedDate,
       }));
     } catch (err) {
       return err.message;

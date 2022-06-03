@@ -38,6 +38,11 @@ const SearchBooks = () => {
     navigate("/create", { replace: true });
   };
 
+  const toBookPage = (book) => {
+    dispatch(setBookData(book));
+    navigate("/book-details", { replace: true });
+  };
+
   const renderedBooks = books.map((book) => (
     <article className="book-list-card" key={book.id}>
       {!book.imageUrl ? (
@@ -54,6 +59,7 @@ const SearchBooks = () => {
       <p>{book.pages}</p>
       {/* <p>{book.infoLink}</p> */}
       <button onClick={() => test(book)}>Create new note</button>
+      <button onClick={() => toBookPage(book)}> More Details</button>
       <br />
 
       {/* <p>{book.description}</p> */}

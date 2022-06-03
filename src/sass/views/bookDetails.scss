@@ -1,0 +1,12 @@
+@import "../mixins";
+@import "../variables";
+
+.button-save {
+  @include button;
+  @include box-shadow;
+  align-self: center;
+  width: 30%;
+  height: 2.5rem;
+  font-size: 100%;
+  margin: 1.5rem;
+}

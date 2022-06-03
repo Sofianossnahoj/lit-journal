@@ -6,6 +6,7 @@ import HomeView from "./views/HomeView";
 import CreateNewEntry from "./views/CreateNewEntry";
 import SearchResults from "./views/SearchResults";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BookDetails from "./views/BookDetails";
 
 function App() {
   return (
@@ -34,6 +35,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <SearchResults />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/book-details"
+            element={
+              <ProtectedRoute>
+                <BookDetails />
               </ProtectedRoute>
             }
           />
