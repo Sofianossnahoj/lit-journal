@@ -16,7 +16,7 @@ export const fetchBooks = createAsyncThunk(
       const response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${API_KEY}`
       );
-      console.log("Response: ", response.data.items);
+      //console.log("Response: ", response.data.items);
       return response.data.items.map((item) => ({
         id: item.id,
         title: item.volumeInfo.title,

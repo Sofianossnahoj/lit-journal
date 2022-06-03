@@ -34,7 +34,7 @@ const SearchBooks = () => {
     console.log("test i searchbooks.jsx", book.authors); */
     /*     dispatch(setBookData(book.title, book.authors)); */
     dispatch(setBookData(book));
-    console.log(book);
+    //console.log(book);
     navigate("/create", { replace: true });
   };
 
@@ -67,7 +67,7 @@ const SearchBooks = () => {
     // Use loader here
     bookContent = <h3>"Loading..."</h3>;
   } else if (booksStatus === "succeeded") {
-    console.log("Success!", books);
+    //console.log("Success!", books);
     bookContent = renderedBooks;
   } else if (booksStatus === "failed") {
     bookContent = <p>{error}</p>;

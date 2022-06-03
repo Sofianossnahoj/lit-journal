@@ -29,7 +29,7 @@ function HomeView() {
     if (currentUser !== null) {
       const uid = currentUser.uid;
       const entryQuery = query(collection(db, `users/${uid}/journal-notes`));
-      console.log(entryQuery);
+      /* console.log(entryQuery); */
       const querySnapshot = await getDocs(entryQuery);
       const data = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
@@ -60,7 +60,7 @@ function HomeView() {
   };
 
   const test = () => {
-    console.log("test");
+    /* console.log("test"); */
     navigate("/search", { replace: true });
   };
 
