@@ -2,12 +2,15 @@
 @import "typography";
 @import "./components/form.scss";
 
+.App {
+  width: 100vw;
+  height: 100vh;
+}
+
 body {
-  background-color: $cremeWhite;
+  background-color: $lightBeige;
   margin: 0 auto;
   box-sizing: border-box;
   transition: all 0.2s linear;
   @include card;
-  width: 100vw;
-  height: 100vh;
 }

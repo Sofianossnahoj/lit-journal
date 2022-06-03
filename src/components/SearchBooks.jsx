@@ -1,15 +1,19 @@
 import { useEffect } from "react";
+import "../sass/components/searchBooks.scss";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   selectAllBooks,
   getBooksStatus,
   getBooksError,
   fetchBooks,
 } from "../features/booksSlice";
+import { setBookData } from "../features/bookEntrySlice";
 import SearchBar from "./SearchBar";
 
 const SearchBooks = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const bookTitle = "";
 
@@ -17,27 +21,44 @@ const SearchBooks = () => {
   const booksStatus = useSelector(getBooksStatus);
   const error = useSelector(getBooksError);
 
+  /*   const createEntry = useSelector(entryInfo) */
+
   useEffect(() => {
     if (booksStatus === "idle" && bookTitle !== "") {
       dispatch(fetchBooks());
     }
   }, [booksStatus, dispatch]);
 
+  const test = (book) => {
+    /*     console.log("book title: ", book.title);
+    console.log("test i searchbooks.jsx", book.authors); */
+    /*     dispatch(setBookData(book.title, book.authors)); */
+    dispatch(setBookData(book));
+    console.log(book);
+    navigate("/create", { replace: true });
+  };
+
   const renderedBooks = books.map((book) => (
     <article className="book-list-card" key={book.id}>
-      <h3>{book.title}</h3>
-      <p>{book.authors}</p>
-      <p>{book.description}</p>
-      {/* <p>{book.readingModes}</p> */}
-      {/* Lägg in defaultbild som tomt värde */}
       {!book.imageUrl ? (
-        <p> bild saknas</p>
+        <p>bild saknas</p>
       ) : (
         <img
+          className="search-image"
           src={book.imageUrl ? book.imageUrl.thumbnail : ""}
           alt="Cover image"
         />
       )}
+      <h4>{book.title}</h4>
+      <p>{book.authors}</p>
+      <p>{book.pages}</p>
+      {/* <p>{book.infoLink}</p> */}
+      <button onClick={() => test(book)}>Create new note</button>
+      <br />
+
+      {/* <p>{book.description}</p> */}
+      {/* <p>{book.readingModes}</p> */}
+      {/* Lägg in defaultbild som tomt värde */}
     </article>
   ));
 
@@ -53,7 +74,7 @@ const SearchBooks = () => {
   }
 
   return (
-    <section>
+    <section className="search-books">
       <SearchBar data={books} />
       <article>{bookContent}</article>
     </section>

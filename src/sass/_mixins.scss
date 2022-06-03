@@ -1,12 +1,6 @@
-@mixin card {
-  display: flex;
-  flex-direction: column;
-}
-
-@mixin input-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(25rem, 1fr));
-  grid-gap: 2rem;
+@mixin box-shadow {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 @mixin button {
@@ -18,7 +12,22 @@
   min-width: 8rem;
 }
 
-@mixin box-shadow {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+@mixin card {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin result-card {
+  display: grid;
+  grid-template-areas: 
+  'image title'
+  'image title'
+  'image title';
+}
+
+// Används?
+@mixin input-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(25rem, 1fr));
+  grid-gap: 2rem;
 }

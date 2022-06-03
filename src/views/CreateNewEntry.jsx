@@ -1,7 +1,8 @@
 import React from "react";
-import "../sass/views/CreateNewEntry.scss";
-import JournalNote from "../components/JournalNote";
+import "../sass/views/createNewEntry.scss";
 import Header from "../components/header";
+import JournalNote from "../components/JournalNote";
+import MenuBar from "../components/MenuBar";
 
 function CreateNewEntry() {
   return (
@@ -9,6 +10,7 @@ function CreateNewEntry() {
       <Header />
       <h1>SPACE FOR SEARCH BUTTON</h1>
       <JournalNote />
+      <MenuBar />
     </main>
   );
 }

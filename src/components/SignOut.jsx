@@ -6,8 +6,10 @@ function SignOut() {
 
   return (
     <div>
-      <button onClick={handleSignOut}>Sign Out</button>
-      {user}
+      <article className="menu-button" onClick={handleSignOut}>
+        <img src="src/images/arrow-right-from-bracket-grey.png" alt="search" className="menu-icons" />
+        <p className="menu-button-text">Signout</p>
+      </article>
     </div>
   );
 }

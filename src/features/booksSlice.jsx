@@ -21,9 +21,10 @@ export const fetchBooks = createAsyncThunk(
         id: item.id,
         title: item.volumeInfo.title,
         authors: item.volumeInfo.authors,
+        pages: item.volumeInfo.pageCount,
         description: item.volumeInfo.description,
-        readingModes: item.volumeInfo.readingModes,
         imageUrl: item.volumeInfo.imageLinks,
+        infoLink: item.volumeInfo.infoLink,
       }));
     } catch (err) {
       return err.message;
