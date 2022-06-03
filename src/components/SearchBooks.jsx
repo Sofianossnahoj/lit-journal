@@ -8,6 +8,7 @@ import {
   getBooksError,
   fetchBooks,
 } from "../features/booksSlice";
+import { setBookData } from "../features/bookEntrySlice";
 import SearchBar from "./SearchBar";
 
 const SearchBooks = () => {
@@ -20,6 +21,8 @@ const SearchBooks = () => {
   const booksStatus = useSelector(getBooksStatus);
   const error = useSelector(getBooksError);
 
+  /*   const createEntry = useSelector(entryInfo) */
+
   useEffect(() => {
     if (booksStatus === "idle" && bookTitle !== "") {
       dispatch(fetchBooks());
@@ -27,7 +30,11 @@ const SearchBooks = () => {
   }, [booksStatus, dispatch]);
 
   const test = (book) => {
-    console.log("test i searchbooks.jsx", book.authors);
+    /*     console.log("book title: ", book.title);
+    console.log("test i searchbooks.jsx", book.authors); */
+    /*     dispatch(setBookData(book.title, book.authors)); */
+    dispatch(setBookData(book));
+    console.log(book);
     navigate("/create", { replace: true });
   };
 
@@ -44,6 +51,8 @@ const SearchBooks = () => {
       )}
       <h4>{book.title}</h4>
       <p>{book.authors}</p>
+      <p>{book.pages}</p>
+      {/* <p>{book.infoLink}</p> */}
       <button onClick={() => test(book)}>Create new note</button>
       <br />
 

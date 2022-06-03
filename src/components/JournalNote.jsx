@@ -5,6 +5,7 @@ import db from "../firebase/firebase";
 import { collection, query, getDocs, doc, setDoc } from "firebase/firestore";
 import { createEntry } from "../features/entriesSlice";
 import { selectUser } from "../features/userSlice";
+import { entryInfo } from "../features/bookEntrySlice";
 
 const JournalNote = () => {
   const [journalNote, setJournalNote] = useState({
@@ -21,6 +22,11 @@ const JournalNote = () => {
 
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
+
+  const bookData = useSelector(entryInfo);
+  console.log(bookData);
+  console.log(bookData.id);
+  console.log(bookData.title);
 
   const navigate = useNavigate();
 
@@ -41,16 +47,16 @@ const JournalNote = () => {
       id: journalNote.id,
     }));
     const newEntryData = {
-          title: journalNote.title,
-          author: journalNote.author,
-          genre: journalNote.genre,
-          method: journalNote.method,
-          worthit: journalNote.worthit,
-          favoriteCharacter: journalNote.favoriteCharacter,
-          favoriteChapter: journalNote.favoriteChapter,
-          sequel: journalNote.sequel,
-          quotes: journalNote.quotes,
-        }
+      title: journalNote.title,
+      author: journalNote.author,
+      genre: journalNote.genre,
+      method: journalNote.method,
+      worthit: journalNote.worthit,
+      favoriteCharacter: journalNote.favoriteCharacter,
+      favoriteChapter: journalNote.favoriteChapter,
+      sequel: journalNote.sequel,
+      quotes: journalNote.quotes,
+    };
     queryData.map(() => {
       setDoc(
         doc(db, `users/${userId}/journal-notes`, journalNote.title),
@@ -58,15 +64,23 @@ const JournalNote = () => {
       );
     });
     dispatch(createEntry(newEntryData));
-    navigate('/home', { replace: true });
+    navigate("/home", { replace: true });
   };
-  
+
   return (
     <section>
       <h1>Create a journal note</h1>
       <form className="form-new-entry" onSubmit={(e) => e.preventDefault()}>
         <section className="form-section-top">
-          <label htmlFor="">Title</label>
+          <p>{bookData.title}</p>
+          {/*           {bookData.map((data) => {
+            return (
+              <div key={data.id}>
+                <p>{data.title}</p>
+              </div>
+            );
+          })} */}
+          {/*           <label htmlFor="">Title</label>
           <input
             className="box"
             type="text"
@@ -92,7 +106,7 @@ const JournalNote = () => {
             value={journalNote.genre}
             onChange={handleChange}
             name="genre"
-          />
+          /> */}
         </section>
         <section className="form-section-bottom">
           <label htmlFor="">Method</label>
@@ -149,11 +163,9 @@ const JournalNote = () => {
             id="quotes"
             name="quotes"
           />
-            <button
-              className="button-save"
-              onClick={handleSubmit}>
-                Save Entry
-            </button>
+          <button className="button-save" onClick={handleSubmit}>
+            Save Entry
+          </button>
         </section>
       </form>
     </section>
