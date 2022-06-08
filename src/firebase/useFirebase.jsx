@@ -8,19 +8,13 @@ import {
   signOut,
 } from "firebase/auth";
 import db from "../firebase/firebase";
-import {
-  query,
-  getDocs,
-  collection,
-  where,
-  addDoc,
-} from "firebase/firestore";
+import { query, getDocs, collection, where, addDoc } from "firebase/firestore";
 import { login, logout, selectUser } from "../features/userSlice";
 
 function useFirebase() {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
-  
+
   const auth = getAuth();
   const googleAuthProvider = new GoogleAuthProvider();
 
@@ -53,29 +47,29 @@ function useFirebase() {
             displayName: userAuth.user.displayName,
           })
         );
-      const user = userAuth.user;
-      //console.log(userAuth);
-      const q = query(collection(db, "users"), where("uid", "==", user.uid));
-      const docs = await getDocs(q);
-      if (docs.docs.length === 0) {
-        await addDoc(collection(db, "users", user.uid), {
-          uid: user.uid,
-          name: user.displayName,
-          authProvider: "google",
-          email: user.email,
-        });
+        const user = userAuth.user;
+        //console.log(userAuth);
+        const q = query(collection(db, "users"), where("uid", "==", user.uid));
+        const docs = await getDocs(q);
+        if (docs.docs.length === 0) {
+          await addDoc(collection(db, "users", user.uid), {
+            uid: user.uid,
+            name: user.displayName,
+            authProvider: "google",
+            email: user.email,
+          });
 
-        await addDoc(docs(db, "users", user.uid, "user details"), {
-          name: user.displayName,
-          authProvider: "google",
-          email: user.email,
-        });
-      }
+          await addDoc(docs(db, "users", user.uid, "user details"), {
+            name: user.displayName,
+            authProvider: "google",
+            email: user.email,
+          });
+        }
       } catch (error) {
         console.log("Error: ", error);
       }
     } else {
-      console.log('Can not log in again')
+      console.log("Can not log in again");
     }
   };
 
@@ -87,25 +81,19 @@ function useFirebase() {
         await signOut(auth);
 
         dispatch(logout());
-        console.log('Dispatch logout and auth signout was fired');
+        console.log("Dispatch logout and auth signout was fired");
       } else {
-        console.log('User already signed out');
+        console.log("User already signed out");
       }
     } catch (error) {
-      console.log('Error: ', error)
+      console.log("Error: ", error);
     }
   };
 
   return {
     handleSignIn,
-    handleSignOut
+    handleSignOut,
   };
-
-  /*   return (
-    <userAuthContext.Provider value={{ handleSignIn, userName }}>
-      {children}
-    </userAuthContext.Provider>
-  ); */
 }
 
 export default useFirebase;

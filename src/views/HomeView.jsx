@@ -29,7 +29,7 @@ function HomeView() {
     if (currentUser !== null) {
       const uid = currentUser.uid;
       const entryQuery = query(collection(db, `users/${uid}/journal-notes`));
-      console.log(entryQuery);
+      /* console.log(entryQuery); */
       const querySnapshot = await getDocs(entryQuery);
       const data = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
@@ -59,8 +59,7 @@ function HomeView() {
     usersEntries();
   };
 
-  const test = () => {
-    console.log("test");
+  const navigateToSearch = () => {
     navigate("/search", { replace: true });
   };
 
@@ -68,29 +67,41 @@ function HomeView() {
     <main className="home-view">
       <h2>LITerature Journal</h2>
       <div className="hr" />
-      <div onClick={test}>
+      <div onSubmit={navigateToSearch}>
         <SearchBar />
       </div>
-      <h5>You don't have any journal entries yet!</h5>
 
-      <Link to="/create">
-        <button>Create New Entry</button>
-      </Link>
+      {entries ? (
+        <span>
+          {entries.map((val, id) => {
+            // console.log("logs val in template map", val.id);
+            return (
+              <div key={id}>
+                <p>{val.title}</p>
+                <p>{val.author}</p>
+                <button onClick={() => handleDelete(val.id)}>Delete</button>
+              </div>
+            );
+          })}
+        </span>
+      ) : (
+        <section className="message-no-entries">
+          <h3>You don't have any journal entries yet!</h3>
 
-      <h2>testar att loopa ut från användares info från firestore</h2>
-      <h1>Testing space</h1>
-      <span>
-        {entries.map((val, id) => {
-          // console.log("logs val in template map", val.id);
-          return (
-            <div key={id}>
-              <p>{val.title}</p>
-              <p>{val.author}</p>
-              <button onClick={() => handleDelete(val.id)}>Delete</button>
-            </div>
-          );
-        })}
-      </span>
+          <Link to="/create">
+            <button>Create New Entry</button>
+          </Link>
+        </section>
+      )}
+
+      {/* <section className="message-no-entries">
+        <h3>You don't have any journal entries yet!</h3>
+
+        <Link to="/create">
+          <button>Create New Entry</button>
+        </Link>
+      </section> */}
+
       <MenuBar />
     </main>
   );

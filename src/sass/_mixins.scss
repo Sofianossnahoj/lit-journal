@@ -19,10 +19,10 @@
 
 @mixin result-card {
   display: grid;
-  grid-template-areas: 
-  'image title'
-  'image title'
-  'image title';
+  grid-template-areas:
+    "image title"
+    "image title"
+    "image title";
 }
 
 // Används?

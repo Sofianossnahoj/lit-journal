@@ -8,9 +8,11 @@ import { selectUser } from "../features/userSlice";
 import { entryInfo } from "../features/bookEntrySlice";
 
 const JournalNote = () => {
+  const bookData = useSelector(entryInfo);
+
   const [journalNote, setJournalNote] = useState({
-    title: "",
-    author: "",
+    title: bookData ? bookData.title : "",
+    author: bookData ? bookData.authors : "",
     genre: "",
     method: "",
     worthit: "",
@@ -23,10 +25,9 @@ const JournalNote = () => {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  const bookData = useSelector(entryInfo);
-  console.log(bookData);
+  /*   console.log(bookData);
   console.log(bookData.id);
-  console.log(bookData.title);
+  console.log(bookData.title); */
 
   const navigate = useNavigate();
 
@@ -39,7 +40,7 @@ const JournalNote = () => {
 
   const handleSubmit = async () => {
     const q = query(collection(db, "users"));
-    console.log("handleSub curentUser: ", currentUser);
+    //console.log("handleSub curentUser: ", currentUser);
     const userId = currentUser.uid;
     const querySnapshot = await getDocs(q);
     const queryData = querySnapshot.docs.map((journalNote) => ({
@@ -57,47 +58,63 @@ const JournalNote = () => {
       sequel: journalNote.sequel,
       quotes: journalNote.quotes,
     };
-    queryData.map(() => {
-      setDoc(
+    console.log(newEntryData);
+    // Async await skapar eventuellt problem, vid inloggning eftersom
+    // journal notes inte finns vid initial rendering rad 63-67
+    console.log("index of: ", userId, db, journalNote.title);
+    queryData.map(async () => {
+      await setDoc(
+        // doc(
+        //   db
+        //     .collection("users")
+        //     .document(`${userId}`)
+        //     .collection("journal-notes")
+        //     .document(journalNote.title)
+        // ),
+        // newEntryData
         doc(db, `users/${userId}/journal-notes`, journalNote.title),
         newEntryData
       );
     });
+    console.log("journalNote.title", journalNote.method);
+    console.log("journalNote", journalNote);
     dispatch(createEntry(newEntryData));
     navigate("/home", { replace: true });
   };
 
   return (
-    <section>
-      <h1>Create a journal note</h1>
+    <section className="card">
+      <h2>Create a journal note</h2>
       <form className="form-new-entry" onSubmit={(e) => e.preventDefault()}>
         <section className="form-section-top">
-          <p>{bookData.title}</p>
-          {/*           {bookData.map((data) => {
-            return (
-              <div key={data.id}>
-                <p>{data.title}</p>
-              </div>
-            );
-          })} */}
-          {/*           <label htmlFor="">Title</label>
-          <input
-            className="box"
-            type="text"
-            id="title"
-            value={journalNote.title}
-            onChange={handleChange}
-            name="title"
-          />
+          <label htmlFor="">Title</label>
+          {!bookData.title ? (
+            <input
+              className="box"
+              type="text"
+              id="title"
+              value={journalNote.title}
+              onChange={handleChange}
+              name="title"
+            />
+          ) : (
+            <p onChange={handleChange} value={journalNote.title}>
+              {bookData.title}
+            </p>
+          )}
           <label htmlFor="">Author</label>
-          <input
-            className="box"
-            type="text"
-            value={journalNote.author}
-            onChange={handleChange}
-            id="author"
-            name="author"
-          />
+          {!bookData.authors ? (
+            <input
+              className="box"
+              type="text"
+              value={journalNote.author}
+              onChange={handleChange}
+              id="author"
+              name="author"
+            />
+          ) : (
+            <p value={journalNote.author}>{bookData.authors}</p>
+          )}
           <label htmlFor="">Genre</label>
           <input
             type="text"
@@ -106,10 +123,15 @@ const JournalNote = () => {
             value={journalNote.genre}
             onChange={handleChange}
             name="genre"
-          /> */}
+          />
         </section>
         <section className="form-section-bottom">
           <label htmlFor="">Method</label>
+          {/*<select className="box" id="method" name="method">
+            <option value="book">Book</option>
+            <option value="audio-book">Audio Book</option>
+            <option value="e-book">E-book</option>
+          </select> */}
           <input
             type="text"
             className="box"
