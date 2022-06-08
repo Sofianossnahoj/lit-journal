@@ -29,12 +29,9 @@ const SearchBooks = () => {
     }
   }, [booksStatus, dispatch]);
 
+  // Change variable name :/
   const test = (book) => {
-    /*     console.log("book title: ", book.title);
-    console.log("test i searchbooks.jsx", book.authors); */
-    /*     dispatch(setBookData(book.title, book.authors)); */
     dispatch(setBookData(book));
-    //console.log(book);
     navigate("/create", { replace: true });
   };
 
@@ -62,10 +59,12 @@ const SearchBooks = () => {
         {/* <p>{book.pages}</p> */}
         {/* <p>{book.infoLink}</p>
         <p className="search-result-description">{book.description}</p> */}
-        <button onClick={() => test(book)} className="create-note-button">
-          Create new note
-        </button>
+        Create new note
       </section>
+      <button
+        onClick={() => test(book)}
+        className="create-note-button"
+      ></button>
       <br />
 
       {/* <p>{book.description}</p> */}

@@ -94,12 +94,6 @@ function useFirebase() {
     handleSignIn,
     handleSignOut,
   };
-
-  /*   return (
-    <userAuthContext.Provider value={{ handleSignIn, userName }}>
-      {children}
-    </userAuthContext.Provider>
-  ); */
 }
 
 export default useFirebase;

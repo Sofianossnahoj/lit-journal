@@ -59,8 +59,7 @@ function HomeView() {
     usersEntries();
   };
 
-  const test = () => {
-    /* console.log("test"); */
+  const navigateToSearch = () => {
     navigate("/search", { replace: true });
   };
 
@@ -68,40 +67,40 @@ function HomeView() {
     <main className="home-view">
       <h2>LITerature Journal</h2>
       <div className="hr" />
-      <div onClick={test}>
+      <div onSubmit={navigateToSearch}>
         <SearchBar />
       </div>
 
-      {/* {entries ? (
+      {entries ? (
         <span>
-        {entries.map((val, id) => {
-          // console.log("logs val in template map", val.id);
-          return (
-            <div key={id}>
-            <p>{val.title}</p>
-            <p>{val.author}</p>
-            <button onClick={() => handleDelete(val.id)}>Delete</button>
-            </div>
+          {entries.map((val, id) => {
+            // console.log("logs val in template map", val.id);
+            return (
+              <div key={id}>
+                <p>{val.title}</p>
+                <p>{val.author}</p>
+                <button onClick={() => handleDelete(val.id)}>Delete</button>
+              </div>
             );
           })}
-          </span>
-          ) : (
-            <div>
-            <h5>You don't have any journal entries yet!</h5>
-            
-            <Link to="/create">
-            <button>Create New Entry</button>
-            </Link>
-            </div>
-          )} */}
+        </span>
+      ) : (
+        <section className="message-no-entries">
+          <h3>You don't have any journal entries yet!</h3>
 
-      <section className="message-no-entries">
+          <Link to="/create">
+            <button>Create New Entry</button>
+          </Link>
+        </section>
+      )}
+
+      {/* <section className="message-no-entries">
         <h3>You don't have any journal entries yet!</h3>
 
         <Link to="/create">
           <button>Create New Entry</button>
         </Link>
-      </section>
+      </section> */}
 
       <MenuBar />
     </main>

@@ -38,14 +38,17 @@ const booksSlice = createSlice({
   initialState,
   // Does this reducer do anything?
   reducers: {
-    bookAdded: {
+    resetSearch: (state, action) => {
+      state.books = [];
+    },
+    /*     bookAdded: {
       reducer(state, action) {
         const nextState = produce(state, (draftState) => {
           draftState.books.push(action.payload);
         });
         return nextState;
       },
-    },
+    }, */
   },
   extraReducers(builder) {
     builder
@@ -68,6 +71,7 @@ export const selectAllBooks = (state) => state.booksApi.books;
 export const getBooksStatus = (state) => state.booksApi.status;
 export const getBooksError = (state) => state.booksApi.error;
 
-export const { bookAdded } = booksSlice.actions;
+export const { resetSearch } = booksSlice.actions;
+/* export const { bookAdded } = booksSlice.actions; */
 
 export default booksSlice.reducer;

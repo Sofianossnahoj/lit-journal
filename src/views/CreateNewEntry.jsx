@@ -11,7 +11,7 @@ function CreateNewEntry() {
         <div className="hr" />
         <JournalNote />
       </section>
-      {/* <MenuBar /> */}
+      <MenuBar />
     </main>
   );
 }
