@@ -8,9 +8,11 @@ import { selectUser } from "../features/userSlice";
 import { entryInfo } from "../features/bookEntrySlice";
 
 const JournalNote = () => {
+  const bookData = useSelector(entryInfo);
+
   const [journalNote, setJournalNote] = useState({
-    title: "",
-    author: "",
+    title: bookData ? bookData.title : "",
+    author: bookData ? bookData.authors : "",
     genre: "",
     method: "",
     worthit: "",
@@ -23,7 +25,6 @@ const JournalNote = () => {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  const bookData = useSelector(entryInfo);
   /*   console.log(bookData);
   console.log(bookData.id);
   console.log(bookData.title); */
@@ -60,7 +61,7 @@ const JournalNote = () => {
     console.log(newEntryData);
     // Async await skapar eventuellt problem, vid inloggning eftersom
     // journal notes inte finns vid initial rendering rad 63-67
-
+    console.log("index of: ", userId, db, journalNote.title);
     queryData.map(async () => {
       await setDoc(
         // doc(
@@ -71,7 +72,7 @@ const JournalNote = () => {
         //     .document(journalNote.title)
         // ),
         // newEntryData
-        doc(db, `users/${userId}/journal-notes`, journalNote.id),
+        doc(db, `users/${userId}/journal-notes`, journalNote.title),
         newEntryData
       );
     });

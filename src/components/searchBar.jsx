@@ -10,12 +10,13 @@ function SearchBar() {
   const handleSearch = (event) => {
     event.preventDefault();
 
-    if (searchTerm === "") {
-      return alert("Please enter a serch term");
-    }
+    // byt till dialog ruta
+    // if (searchTerm === "") {
+    //   return alert("Please enter a serch term");
+    // }
 
     dispatch(fetchBooks(searchTerm));
-    setSearchTerm();
+    setSearchTerm("");
   };
 
   return (
