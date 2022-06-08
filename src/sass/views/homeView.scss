@@ -14,6 +14,11 @@
   .note-list {
     height: inherit;
   }
+  .image {
+    margin-top: 0.5em;
+    width: 40%;
+    height: 40%;
+  }
   .note-container {
     margin-top: 2em;
     padding: 0.5em;
@@ -22,11 +27,21 @@
     background-color: $white;
     width: 90%;
     @include card;
-
+    .test {
+      width: 100%;
+    }
     .note-text {
       background-color: $cremeWhite;
       border-radius: 2px;
       margin-left: 1rem;
+      width: 100%;
+    }
+
+    .note-text-extended {
+      background-color: $cremeWhite;
+      border-radius: 2px;
+      margin-left: 1rem;
+      width: 90%;
     }
     .note-label {
       margin-left: 1rem;
@@ -34,6 +49,12 @@
     .note-collapsed {
       height: fit-content;
       width: 90%;
+
+      .note-with-image {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
     }
   }
 

@@ -9,7 +9,7 @@ import { entryInfo } from "../features/bookEntrySlice";
 
 const JournalNote = () => {
   const bookData = useSelector(entryInfo);
-
+  console.log(bookData);
   const [journalNote, setJournalNote] = useState({
     title: bookData ? bookData.title : "",
     author: bookData ? bookData.authors : "",
@@ -20,14 +20,13 @@ const JournalNote = () => {
     favoriteChapter: "",
     sequel: "",
     quotes: "",
+    image: bookData ? bookData.imageUrl.smallThumbnail : "",
   });
 
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  /* console.log(bookData);
-  console.log(bookData.id);
-  console.log(bookData.title); */
+  console.log(journalNote.image);
 
   const navigate = useNavigate();
 
@@ -57,17 +56,15 @@ const JournalNote = () => {
       favoriteChapter: journalNote.favoriteChapter,
       sequel: journalNote.sequel,
       quotes: journalNote.quotes,
+      image: journalNote.image,
     };
-    console.log(newEntryData);
-    console.log("index of: ", userId, db, journalNote.title);
     queryData.map(async () => {
       await setDoc(
         doc(db, `users/${userId}/journal-notes`, journalNote.title),
         newEntryData
       );
     });
-    console.log("journalNote.title", journalNote.method);
-    console.log("journalNote", journalNote);
+
     dispatch(createEntry(newEntryData));
     navigate("/home", { replace: true });
   };
@@ -78,9 +75,10 @@ const JournalNote = () => {
       <form
         className="form-new-entry"
         onSubmit={(e) => e.preventDefault()}
-        autocomplete="off"
+        autoComplete="off"
       >
         <section className="form-section-top">
+          <img src={journalNote.image} alt="Book Cover" className="image" />
           <label>Title</label>
           {!bookData.title ? (
             <input

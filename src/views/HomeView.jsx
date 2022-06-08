@@ -77,33 +77,48 @@ function HomeView() {
       {entries.length > 0 ? (
         <span className="note-list">
           {entries.map((note, id) => {
-            // console.log("logs val in template map", val.id);
             return (
               <article key={id} className="note-container">
                 <section className="note-collapsed">
-                  <label className="note-label">Title</label>
-                  <p className="note-text">{note.title}</p>
-                  <label className="note-label">Author</label>
-                  <p className="note-text">{note.author}</p>
-                  <label className="note-label">Genre</label>
-                  <p className="note-text">{note.genre}</p>
-                  <label className="note-label">Method</label>
-                  <p className="note-text">{note.method}</p>
+                  <div className={note.image ? "note-with-image" : ""}>
+                    {note.image ? (
+                      <img
+                        src={note.image}
+                        alt="Book Cover"
+                        className="image"
+                      />
+                    ) : (
+                      <p />
+                    )}
+
+                    <div>
+                      <label className="note-label">Title</label>
+                      <p className="note-text">{note.title}</p>
+                      <label className="note-label">Author</label>
+                      <p className="note-text">{note.author}</p>
+                      <label className="note-label">Genre</label>
+                      <p className="note-text">{note.genre}</p>
+                    </div>
+                  </div>
                 </section>
                 {isVisible ? (
-                  <section className="">
+                  <section className="test">
+                    <label className="note-label">Method</label>
+                    <p className="note-text-extended">{note.method}</p>
                     <label className="note-label">Was it worth the read?</label>
-                    <p className="note-text">{note.worthit}</p>
+                    <p className="note-text-extended">{note.worthit}</p>
                     <label className="note-label">Favorite chapter</label>
-                    <p className="note-text">{note.favoriteChapter}</p>
+                    <p className="note-text-extended">{note.favoriteChapter}</p>
                     <label className="note-label">Favorite character</label>
-                    <p className="note-text">{note.favoriteCharacter}</p>
+                    <p className="note-text-extended">
+                      {note.favoriteCharacter}
+                    </p>
                     <label className="note-label">
                       Sequel, will you read it?
                     </label>
-                    <p className="note-text">{note.sequel}</p>
+                    <p className="note-text-extended">{note.sequel}</p>
                     <label className="note-label">Quotes</label>
-                    <p className="note-text">{note.quotes}</p>
+                    <p className="note-text-extended">{note.quotes}</p>
                   </section>
                 ) : (
                   <p></p>
