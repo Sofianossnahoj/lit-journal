@@ -21,16 +21,13 @@ const SearchBooks = () => {
   const booksStatus = useSelector(getBooksStatus);
   const error = useSelector(getBooksError);
 
-  /*   const createEntry = useSelector(entryInfo) */
-
   useEffect(() => {
     if (booksStatus === "idle" && bookTitle !== "") {
       dispatch(fetchBooks());
     }
   }, [booksStatus, dispatch]);
 
-  // Change variable name :/
-  const test = (book) => {
+  const createNote = (book) => {
     dispatch(setBookData(book));
     navigate("/create", { replace: true });
   };
@@ -44,7 +41,7 @@ const SearchBooks = () => {
     <main className="search-result" key={book.id}>
       <section onClick={() => toBookPage(book)} className=" book-list-card">
         {!book.imageUrl ? (
-          <p className=" no-search-image search-image">No cover Image</p>
+          <p className=" no-search-image search-image">No cover image</p>
         ) : (
           <img
             className="search-image"
@@ -53,32 +50,24 @@ const SearchBooks = () => {
           />
         )}
         <div>
-          <h4>{book.title}</h4>
-          <p>{book.authors}</p>
+          <h4 className="search-title">{book.title}</h4>
+          <p className="search-authors">{book.authors}</p>
+          <button
+            onClick={(event) => {
+              event.stopPropagation();
+              createNote(book)
+            }}
+            className="create-note-button"
+          >Create New Note</button>
         </div>
-        {/* <p>{book.pages}</p> */}
-        {/* <p>{book.infoLink}</p>
-        <p className="search-result-description">{book.description}</p> */}
-        Create new note
       </section>
-      <button
-        onClick={() => test(book)}
-        className="create-note-button"
-      ></button>
-      <br />
-
-      {/* <p>{book.description}</p> */}
-      {/* <p>{book.readingModes}</p> */}
-      {/* Lägg in defaultbild som tomt värde */}
     </main>
   ));
 
   let bookContent;
   if (booksStatus === "loading") {
-    // Use loader here
-    bookContent = <h3>"Loading..."</h3>;
+    bookContent = <h3>Loading...</h3>;
   } else if (booksStatus === "succeeded") {
-    //console.log("Success!", books);
     bookContent = renderedBooks;
   } else if (booksStatus === "failed") {
     bookContent = <p>{error}</p>;

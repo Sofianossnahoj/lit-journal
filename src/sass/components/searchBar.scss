@@ -2,10 +2,12 @@
 
 .search-bar {
   width: 100%;
+  text-align: center;
 
   input {
     @include box-shadow;
     width: 85%;
     border-style: none;
+    margin-top: 1em;
   }
 }
