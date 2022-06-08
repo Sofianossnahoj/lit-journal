@@ -24,6 +24,8 @@
     margin-top: 0.3rem;
     background-color: $cremeWhite;
     @include box-shadow;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
   }
   .button-save {
     @include button;
@@ -44,6 +46,8 @@
 .form-section-top {
   .box {
     width: 50%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
   }
 }
 
