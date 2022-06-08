@@ -9,7 +9,6 @@ function SearchBar() {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    // console.log(searchTerm);
 
     if (searchTerm === "") {
       return alert("Please enter a serch term");

@@ -44,28 +44,34 @@ const SearchBooks = () => {
   };
 
   const renderedBooks = books.map((book) => (
-    <article className="book-list-card" key={book.id}>
-      {!book.imageUrl ? (
-        <p>bild saknas</p>
-      ) : (
-        <img
-          className="search-image"
-          src={book.imageUrl ? book.imageUrl.thumbnail : ""}
-          alt="Cover image"
-        />
-      )}
-      <h4>{book.title}</h4>
-      <p>{book.authors}</p>
-      <p>{book.pages}</p>
-      {/* <p>{book.infoLink}</p> */}
-      <button onClick={() => test(book)}>Create new note</button>
-      <button onClick={() => toBookPage(book)}> More Details</button>
+    <main className="search-result" key={book.id}>
+      <section onClick={() => toBookPage(book)} className=" book-list-card">
+        {!book.imageUrl ? (
+          <p className=" no-search-image search-image">No cover Image</p>
+        ) : (
+          <img
+            className="search-image"
+            src={book.imageUrl ? book.imageUrl.thumbnail : ""}
+            alt="Cover image"
+          />
+        )}
+        <div>
+          <h4>{book.title}</h4>
+          <p>{book.authors}</p>
+        </div>
+        {/* <p>{book.pages}</p> */}
+        {/* <p>{book.infoLink}</p>
+        <p className="search-result-description">{book.description}</p> */}
+        <button onClick={() => test(book)} className="create-note-button">
+          Create new note
+        </button>
+      </section>
       <br />
 
       {/* <p>{book.description}</p> */}
       {/* <p>{book.readingModes}</p> */}
       {/* Lägg in defaultbild som tomt värde */}
-    </article>
+    </main>
   ));
 
   let bookContent;

@@ -71,26 +71,38 @@ function HomeView() {
       <div onClick={test}>
         <SearchBar />
       </div>
-      <h5>You don't have any journal entries yet!</h5>
 
-      <Link to="/create">
-        <button>Create New Entry</button>
-      </Link>
-
-      <h2>testar att loopa ut från användares info från firestore</h2>
-      <h1>Testing space</h1>
-      <span>
+      {/* {entries ? (
+        <span>
         {entries.map((val, id) => {
           // console.log("logs val in template map", val.id);
           return (
             <div key={id}>
-              <p>{val.title}</p>
-              <p>{val.author}</p>
-              <button onClick={() => handleDelete(val.id)}>Delete</button>
+            <p>{val.title}</p>
+            <p>{val.author}</p>
+            <button onClick={() => handleDelete(val.id)}>Delete</button>
             </div>
-          );
-        })}
-      </span>
+            );
+          })}
+          </span>
+          ) : (
+            <div>
+            <h5>You don't have any journal entries yet!</h5>
+            
+            <Link to="/create">
+            <button>Create New Entry</button>
+            </Link>
+            </div>
+          )} */}
+
+      <section className="message-no-entries">
+        <h3>You don't have any journal entries yet!</h3>
+
+        <Link to="/create">
+          <button>Create New Entry</button>
+        </Link>
+      </section>
+
       <MenuBar />
     </main>
   );

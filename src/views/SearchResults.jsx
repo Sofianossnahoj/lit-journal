@@ -1,12 +1,12 @@
 import "../sass/views/searchResults.scss";
 import SearchBooks from "../components/SearchBooks";
 import MenuBar from "../components/MenuBar";
-import Header from "../components/header";
 
 const SearchResults = () => {
   return (
     <main className="search-results">
-      <Header />
+      <h2>LITerature Journal</h2>
+      <div className="hr" />
       <SearchBooks />
       <MenuBar />
     </main>

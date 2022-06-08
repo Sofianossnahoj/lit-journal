@@ -82,8 +82,8 @@ const JournalNote = () => {
   };
 
   return (
-    <section>
-      <h1>Create a journal note</h1>
+    <section className="card">
+      <h2>Create a journal note</h2>
       <form className="form-new-entry" onSubmit={(e) => e.preventDefault()}>
         <section className="form-section-top">
           <label htmlFor="">Title</label>
