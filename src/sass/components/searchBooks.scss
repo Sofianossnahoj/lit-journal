@@ -3,7 +3,7 @@
 
 .search-books {
   min-height: 85%;
-  
+
   .search-result {
     background-color: $white;
     margin: 0.75em;
@@ -12,14 +12,12 @@
   }
 
   .book-list-card {
-
     display: grid;
     gap: 1em;
     grid-template-areas:
       "image title"
       "image authors"
       "image button";
-
   }
 
   .search-image {

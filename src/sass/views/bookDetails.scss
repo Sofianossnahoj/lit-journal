@@ -1,12 +1,41 @@
 @import "../mixins";
 @import "../variables";
 
-.button-save {
-  @include button;
-  @include box-shadow;
-  align-self: center;
-  width: 30%;
-  height: 2.5rem;
-  font-size: 100%;
-  margin: 1.5rem;
+.book-details-view {
+  text-align: -webkit-center;
+  height: 100%;
+  width: 100%;
+
+  .hr {
+    @include hr;
+  }
+  .book-detail-container {
+    margin-top: 2em;
+    padding: 0.5em;
+    border-radius: 2px;
+    background-color: $white;
+    width: 90%;
+
+    .search-image {
+      grid-area: image;
+      height: 160px;
+      width: 120px;
+    }
+    .no-search-image {
+      grid-area: image;
+      background-color: $lightBeige;
+      height: 160px;
+      width: 120px;
+      text-align: center;
+    }
+  }
+  .button-save {
+    @include button;
+    @include box-shadow;
+    align-self: center;
+    width: 30%;
+    height: 2.5rem;
+    font-size: 100%;
+    margin: 1.5rem;
+  }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import "../sass/views/createNewEntry.scss";
+import "../sass/views/CreateNewEntry.scss";
 import JournalNote from "../components/JournalNote";
 import MenuBar from "../components/MenuBar";
 

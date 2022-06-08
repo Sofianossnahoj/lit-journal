@@ -59,19 +59,9 @@ const JournalNote = () => {
       quotes: journalNote.quotes,
     };
     console.log(newEntryData);
-    // Async await skapar eventuellt problem, vid inloggning eftersom
-    // journal notes inte finns vid initial rendering rad 63-67
     console.log("index of: ", userId, db, journalNote.title);
     queryData.map(async () => {
       await setDoc(
-        // doc(
-        //   db
-        //     .collection("users")
-        //     .document(`${userId}`)
-        //     .collection("journal-notes")
-        //     .document(journalNote.title)
-        // ),
-        // newEntryData
         doc(db, `users/${userId}/journal-notes`, journalNote.title),
         newEntryData
       );
@@ -84,8 +74,12 @@ const JournalNote = () => {
 
   return (
     <section className="card">
-      <h2>Create a journal note</h2>
-      <form className="form-new-entry" onSubmit={(e) => e.preventDefault()}>
+      <h3>Create a journal note</h3>
+      <form
+        className="form-new-entry"
+        onSubmit={(e) => e.preventDefault()}
+        autocomplete="off"
+      >
         <section className="form-section-top">
           <label>Title</label>
           {!bookData.title ? (
@@ -98,7 +92,11 @@ const JournalNote = () => {
               name="title"
             />
           ) : (
-            <p onChange={handleChange} value={journalNote.title}>
+            <p
+              onChange={handleChange}
+              value={journalNote.title}
+              className="box"
+            >
               {bookData.title}
             </p>
           )}
@@ -113,7 +111,9 @@ const JournalNote = () => {
               name="author"
             />
           ) : (
-            <p value={journalNote.author}>{bookData.authors}</p>
+            <p value={journalNote.author} className="box">
+              {bookData.authors}
+            </p>
           )}
           <label>Genre</label>
           <input

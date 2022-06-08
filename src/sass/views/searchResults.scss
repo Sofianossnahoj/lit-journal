@@ -1,14 +1,11 @@
 @import "../variables";
+@import "../mixins";
 
 .search-results {
   height: 100%;
   width: 100%;
 
   .hr {
-    height: 3px;
-    background: $darkGrey;
-    margin-bottom: 3em;
-    width: 85%;
-    margin: 0 auto;
+    @include hr;
   }
 }

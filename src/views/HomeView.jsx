@@ -72,9 +72,10 @@ function HomeView() {
       <div onSubmit={navigateToSearch}>
         <SearchBar />
       </div>
+      <h3>Your Entries</h3>
 
       {entries.length > 0 ? (
-        <span>
+        <span className="note-list">
           {entries.map((note, id) => {
             // console.log("logs val in template map", val.id);
             return (

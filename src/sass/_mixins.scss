@@ -17,6 +17,13 @@
   flex-direction: column;
 }
 
+@mixin hr {
+  height: 2px;
+  background: $darkGrey;
+  width: 85%;
+  margin: 0 auto;
+}
+
 // @mixin result-card {
 //   display: grid;
 //   grid-template-areas:

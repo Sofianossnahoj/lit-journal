@@ -8,11 +8,11 @@
   width: 100%;
 
   .hr {
-    height: 3px;
-    background: $darkGrey;
-    margin-bottom: 3em;
-    width: 85%;
-    margin: 0 auto;
+    @include hr;
+  }
+
+  .note-list {
+    height: inherit;
   }
   .note-container {
     margin-top: 2em;
