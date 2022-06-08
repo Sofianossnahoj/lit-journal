@@ -4,16 +4,17 @@
 nav {
   background-color: $cremeWhite;
   position: sticky;
-  bottom: 0;
+  bottom: 0px;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  padding: 0.5em;
+  padding: 0.6em;
 
   .menu-button {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
   }
 
   .menu-icons {
