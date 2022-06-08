@@ -2,8 +2,7 @@
 @import "../variables";
 
 .search-books {
-  height: 100%;
-  width: 100%;
+  min-height: 85%;
   
   .search-result {
     background-color: $white;

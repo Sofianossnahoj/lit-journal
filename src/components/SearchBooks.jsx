@@ -66,7 +66,7 @@ const SearchBooks = () => {
 
   let bookContent;
   if (booksStatus === "loading") {
-    bookContent = <h3>"Loading..."</h3>;
+    bookContent = <h3>Loading...</h3>;
   } else if (booksStatus === "succeeded") {
     bookContent = renderedBooks;
   } else if (booksStatus === "failed") {
