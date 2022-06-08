@@ -17,13 +17,13 @@
   flex-direction: column;
 }
 
-@mixin result-card {
-  display: grid;
-  grid-template-areas:
-    "image title"
-    "image title"
-    "image title";
-}
+// @mixin result-card {
+//   display: grid;
+//   grid-template-areas:
+//     "image title"
+//     "image title"
+//     "image title";
+// }
 
 // Används?
 @mixin input-grid {

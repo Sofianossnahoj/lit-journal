@@ -12,12 +12,14 @@
   }
 
   .book-list-card {
+
     display: grid;
     gap: 1em;
     grid-template-areas:
       "image title"
       "image authors"
       "image button";
+
   }
 
   .search-image {

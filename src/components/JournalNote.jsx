@@ -25,7 +25,7 @@ const JournalNote = () => {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
 
-  /*   console.log(bookData);
+  /* console.log(bookData);
   console.log(bookData.id);
   console.log(bookData.title); */
 
@@ -87,7 +87,7 @@ const JournalNote = () => {
       <h2>Create a journal note</h2>
       <form className="form-new-entry" onSubmit={(e) => e.preventDefault()}>
         <section className="form-section-top">
-          <label htmlFor="">Title</label>
+          <label>Title</label>
           {!bookData.title ? (
             <input
               className="box"
@@ -102,7 +102,7 @@ const JournalNote = () => {
               {bookData.title}
             </p>
           )}
-          <label htmlFor="">Author</label>
+          <label>Author</label>
           {!bookData.authors ? (
             <input
               className="box"
@@ -115,7 +115,7 @@ const JournalNote = () => {
           ) : (
             <p value={journalNote.author}>{bookData.authors}</p>
           )}
-          <label htmlFor="">Genre</label>
+          <label>Genre</label>
           <input
             type="text"
             className="box"
@@ -126,7 +126,7 @@ const JournalNote = () => {
           />
         </section>
         <section className="form-section-bottom">
-          <label htmlFor="">Method</label>
+          <label>Method</label>
           {/*<select className="box" id="method" name="method">
             <option value="book">Book</option>
             <option value="audio-book">Audio Book</option>
@@ -140,7 +140,7 @@ const JournalNote = () => {
             id="method"
             name="method"
           />
-          <label htmlFor="">Was it worth the read?</label>
+          <label>Was it worth the read?</label>
           <textarea
             type="text"
             className="box box-large"
@@ -149,7 +149,7 @@ const JournalNote = () => {
             id="worthit"
             name="worthit"
           />
-          <label htmlFor="">Favorite chapter</label>
+          <label>Favorite chapter</label>
           <input
             type="text"
             className="box"
@@ -158,7 +158,7 @@ const JournalNote = () => {
             id="favoriteChapter"
             name="favoriteChapter"
           />
-          <label htmlFor="">Favorite character</label>
+          <label>Favorite character</label>
           <input
             type="text"
             className="box"
@@ -167,7 +167,7 @@ const JournalNote = () => {
             id="favoriteCharacter"
             name="favoriteCharacter"
           />
-          <label htmlFor="">Sequel, will you read it?</label>
+          <label>Sequel, will you read it?</label>
           <input
             type="text"
             className="box"
@@ -176,7 +176,7 @@ const JournalNote = () => {
             id="sequel"
             name="sequel"
           />
-          <label htmlFor="">Quotes</label>
+          <label>Quotes</label>
           <textarea
             type="text"
             className="box box-large"
