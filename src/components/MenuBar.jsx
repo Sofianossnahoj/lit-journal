@@ -1,14 +1,14 @@
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import "../sass/components/menuBar.scss";
 import useFirebase from "../firebase/useFirebase";
 import { resetSearch } from "../features/booksSlice";
+import "../sass/components/menuBar.scss";
 
 function MenuBar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { handleSignOut, user } = useFirebase();
+  const { handleSignOut } = useFirebase();
 
   const navigateToSearch = () => {
     navigate("/search", { replace: true });
@@ -25,7 +25,7 @@ function MenuBar() {
             className="menu-icons"
           />
         </Link>
-          <p className="menu-button-text">Home</p>
+        <p className="menu-button-text">Home</p>
       </article>
       <article className="menu-button">
         <Link to="/create">
@@ -51,7 +51,8 @@ function MenuBar() {
           <img
             src="src/images/arrow-right-from-bracket-grey.png"
             alt="logout"
-            className="menu-icons" />
+            className="menu-icons"
+          />
         </Link>
         <p className="menu-button-text">Sign out</p>
       </article>

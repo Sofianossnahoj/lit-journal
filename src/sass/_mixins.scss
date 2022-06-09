@@ -23,18 +23,3 @@
   width: 85%;
   margin: 0 auto;
 }
-
-// @mixin result-card {
-//   display: grid;
-//   grid-template-areas:
-//     "image title"
-//     "image title"
-//     "image title";
-// }
-
-// Används?
-@mixin input-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(25rem, 1fr));
-  grid-gap: 2rem;
-}

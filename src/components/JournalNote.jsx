@@ -9,7 +9,6 @@ import { entryInfo } from "../features/bookEntrySlice";
 
 const JournalNote = () => {
   const bookData = useSelector(entryInfo);
-  console.log(bookData);
   const [journalNote, setJournalNote] = useState({
     title: bookData ? bookData.title : "",
     author: bookData ? bookData.authors : "",
@@ -25,9 +24,6 @@ const JournalNote = () => {
 
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
-
-  console.log(journalNote.image);
-
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -39,7 +35,6 @@ const JournalNote = () => {
 
   const handleSubmit = async () => {
     const q = query(collection(db, "users"));
-    //console.log("handleSub curentUser: ", currentUser);
     const userId = currentUser.uid;
     const querySnapshot = await getDocs(q);
     const queryData = querySnapshot.docs.map((journalNote) => ({
@@ -129,11 +124,6 @@ const JournalNote = () => {
         </section>
         <section className="form-section-bottom">
           <label>Method</label>
-          {/*<select className="box" id="method" name="method">
-            <option value="book">Book</option>
-            <option value="audio-book">Audio Book</option>
-            <option value="e-book">E-book</option>
-          </select> */}
           <input
             type="text"
             className="box"

@@ -20,7 +20,6 @@ function useFirebase() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
-      // console.log("inside useeffect userAuth: ", userAuth);
       if (userAuth) {
         dispatch(
           login({
@@ -35,7 +34,6 @@ function useFirebase() {
     });
   }, []);
 
-  // Prevent from firing on reload
   const handleSignIn = async () => {
     if (currentUser === null) {
       try {
@@ -48,7 +46,6 @@ function useFirebase() {
           })
         );
         const user = userAuth.user;
-        //console.log(userAuth);
         const q = query(collection(db, "users"), where("uid", "==", user.uid));
         const docs = await getDocs(q);
         if (docs.docs.length === 0) {
@@ -73,15 +70,12 @@ function useFirebase() {
     }
   };
 
-  // Prevent from firing twice
   const handleSignOut = async () => {
     try {
       if (currentUser !== null) {
         const auth = getAuth();
         await signOut(auth);
-
         dispatch(logout());
-        console.log("Dispatch logout and auth signout was fired");
       } else {
         console.log("User already signed out");
       }

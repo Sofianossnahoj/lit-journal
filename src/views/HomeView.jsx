@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../sass/views/homeView.scss";
-
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
-import { selectUser } from "../features/userSlice";
 import db from "../firebase/firebase";
 import {
   collection,
@@ -13,41 +8,32 @@ import {
   doc,
   deleteDoc,
 } from "@firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
+import { selectUser } from "../features/userSlice";
 import SearchBar from "../components/SearchBar";
 import MenuBar from "../components/MenuBar";
+import "../sass/views/homeView.scss";
 
 function HomeView() {
+  const [isVisible, setIsVisible] = useState(false);
   const entries = useSelector(getEntries);
   const currentUser = useSelector(selectUser);
-  const [isVisible, setIsVisible] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const usersEntries = async () => {
-    // console.log("logs currentuser: ", currentUser);
-    // const auth = getAuth();
-    // const user = auth.currentUser;
     if (currentUser !== null) {
       const uid = currentUser.uid;
       const entryQuery = query(collection(db, `users/${uid}/journal-notes`));
-      /* console.log(entryQuery); */
       const querySnapshot = await getDocs(entryQuery);
       const data = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-
       dispatch(setEntries(data));
-
-      // setEntries(data);
-      // console.log(data);
-      // console.log(entries);
     }
-    // let currentUserId = firebase.auth().currentUser;
-    // setCurrentUser(currentUserId);
-
-    // console.log(entries);
   };
 
   useEffect(() => {
@@ -100,7 +86,7 @@ function HomeView() {
                   </div>
                 </section>
                 {isVisible ? (
-                  <section className="test">
+                  <section>
                     <label className="note-label">Genre</label>
                     <p className="note-text">{note.genre}</p>
                     <label className="note-label">Method</label>
@@ -121,7 +107,7 @@ function HomeView() {
                     <p className="note-text-extended">{note.quotes}</p>
                   </section>
                 ) : (
-                  <p></p>
+                  <p />
                 )}
                 <section className="note-button">
                   <button

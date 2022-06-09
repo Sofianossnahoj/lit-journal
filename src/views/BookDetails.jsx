@@ -1,9 +1,9 @@
-import MenuBar from "../components/MenuBar";
-import "../sass/views/bookDetails.scss";
-import SearchBar from "../components/searchBar";
 import { useSelector } from "react-redux";
 import { entryInfo } from "../features/bookEntrySlice";
 import { useNavigate } from "react-router-dom";
+import MenuBar from "../components/MenuBar";
+import SearchBar from "../components/searchBar";
+import "../sass/views/bookDetails.scss";
 
 const BookDetails = () => {
   const book = useSelector(entryInfo);
@@ -36,8 +36,8 @@ const BookDetails = () => {
         <section>
           <h2>{book.title}</h2>
           {!book.authors ? <h3>Author unknown</h3> : <h3>By {book.authors}</h3>}
-          {!book.pages ? <p></p> : <p>{book.pages} pages </p>}
-          {!book.pubDate ? <p></p> : <p> First published {book.pubDate}</p>}
+          {!book.pages ? <p /> : <p>{book.pages} pages </p>}
+          {!book.pubDate ? <p /> : <p> First published {book.pubDate}</p>}
           <hr />
           <button onClick={() => toJournalPage(book)} className="button-save">
             {" "}

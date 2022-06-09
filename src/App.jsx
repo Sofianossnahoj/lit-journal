@@ -1,5 +1,4 @@
 import React from "react";
-import "./sass/App.scss";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./views/LandingPage";
 import HomeView from "./views/HomeView";
@@ -7,6 +6,7 @@ import CreateNewEntry from "./views/CreateNewEntry";
 import SearchResults from "./views/SearchResults";
 import ProtectedRoute from "./components/ProtectedRoute";
 import BookDetails from "./views/BookDetails";
+import "./sass/App.scss";
 
 function App() {
   return (

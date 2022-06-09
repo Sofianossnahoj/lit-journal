@@ -16,7 +16,6 @@ export const fetchBooks = createAsyncThunk(
       const response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${API_KEY}`
       );
-      //console.log("Response: ", response.data.items);
       return response.data.items.map((item) => ({
         id: item.id,
         title: item.volumeInfo.title,
@@ -36,19 +35,10 @@ export const fetchBooks = createAsyncThunk(
 const booksSlice = createSlice({
   name: "books",
   initialState,
-  // Does this reducer do anything?
   reducers: {
-    resetSearch: (state, action) => {
+    resetSearch: (state) => {
       state.books = [];
     },
-    /*     bookAdded: {
-      reducer(state, action) {
-        const nextState = produce(state, (draftState) => {
-          draftState.books.push(action.payload);
-        });
-        return nextState;
-      },
-    }, */
   },
   extraReducers(builder) {
     builder
@@ -57,7 +47,6 @@ const booksSlice = createSlice({
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.status = "succeeded";
-        // console.log(action.payload);
         state.books = action.payload;
       })
       .addCase(fetchBooks.rejected, (state, action) => {
@@ -72,6 +61,5 @@ export const getBooksStatus = (state) => state.booksApi.status;
 export const getBooksError = (state) => state.booksApi.error;
 
 export const { resetSearch } = booksSlice.actions;
-/* export const { bookAdded } = booksSlice.actions; */
 
 export default booksSlice.reducer;

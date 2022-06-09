@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "../sass/components/searchBar.scss";
 import { useDispatch } from "react-redux";
 import { fetchBooks } from "../features/booksSlice";
+import "../sass/components/searchBar.scss";
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -9,11 +9,6 @@ function SearchBar() {
 
   const handleSearch = (event) => {
     event.preventDefault();
-
-    // byt till dialog ruta
-    // if (searchTerm === "") {
-    //   return alert("Please enter a serch term");
-    // }
 
     dispatch(fetchBooks(searchTerm));
     setSearchTerm("");
