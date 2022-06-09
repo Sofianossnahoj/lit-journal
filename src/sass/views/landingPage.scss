@@ -5,9 +5,9 @@
   @include card;
   width: 100vw;
   height: 100vh;
-  background-color: $softPink;
+  background-color: $lightBeige;
 
-  .content-box{
+  .content-box {
     @include box-shadow;
     display: flex;
     flex-direction: column;

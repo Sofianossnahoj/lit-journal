@@ -13,11 +13,16 @@ const BookDetails = () => {
     navigate("/create", { replace: true });
   };
 
+  const navigateToSearch = () => {
+    navigate("/search", { replace: true });
+  };
   return (
     <main className="book-details-view">
       <h2>LITerature Journal</h2>
       <div className="hr" />
-      <SearchBar />
+      <div onSubmit={navigateToSearch}>
+        <SearchBar />
+      </div>
       <article className="book-detail-container">
         {!book.imageUrl ? (
           <p className=" no-search-image search-image">No cover Image</p>

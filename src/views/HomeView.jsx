@@ -96,13 +96,13 @@ function HomeView() {
                       <p className="note-text">{note.title}</p>
                       <label className="note-label">Author</label>
                       <p className="note-text">{note.author}</p>
-                      <label className="note-label">Genre</label>
-                      <p className="note-text">{note.genre}</p>
                     </div>
                   </div>
                 </section>
                 {isVisible ? (
                   <section className="test">
+                    <label className="note-label">Genre</label>
+                    <p className="note-text">{note.genre}</p>
                     <label className="note-label">Method</label>
                     <p className="note-text-extended">{note.method}</p>
                     <label className="note-label">Was it worth the read?</label>
@@ -155,14 +155,6 @@ function HomeView() {
           </Link>
         </section>
       )}
-
-      {/* <section className="message-no-entries">
-        <h3>You don't have any journal entries yet!</h3>
-
-        <Link to="/create">
-          <button>Create New Entry</button>
-        </Link>
-      </section> */}
       <MenuBar />
     </main>
   );

@@ -50,15 +50,17 @@ const SearchBooks = () => {
           />
         )}
         <div>
-          <h4 className="search-title">{book.title}</h4>
+          <h3 className="search-title">{book.title}</h3>
           <p className="search-authors">{book.authors}</p>
           <button
             onClick={(event) => {
               event.stopPropagation();
-              createNote(book)
+              createNote(book);
             }}
             className="create-note-button"
-          >Create New Note</button>
+          >
+            Create New Note
+          </button>
         </div>
       </section>
     </main>

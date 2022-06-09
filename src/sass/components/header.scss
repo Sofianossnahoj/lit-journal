@@ -11,10 +11,8 @@ header {
     margin-top: 0;
   }
 
-  // .hr {
-  //   height: 3px;
-  //   background: $darkGrey;
-  //   margin-bottom: 3em;
-  //   width: 85%;
-  // }
+  .hr {
+    @include hr;
+    margin-bottom: 2em;
+  }
 }

@@ -20,7 +20,7 @@ const JournalNote = () => {
     favoriteChapter: "",
     sequel: "",
     quotes: "",
-    image: bookData ? bookData.imageUrl.smallThumbnail : "",
+    image: bookData.imageUrl ? bookData.imageUrl.thumbnail : "",
   });
 
   const currentUser = useSelector(selectUser);
@@ -78,7 +78,11 @@ const JournalNote = () => {
         autoComplete="off"
       >
         <section className="form-section-top">
-          <img src={journalNote.image} alt="Book Cover" className="image" />
+          {journalNote.image ? (
+            <img src={journalNote.image} alt="Book Cover" className="image" />
+          ) : (
+            <p />
+          )}
           <label>Title</label>
           {!bookData.title ? (
             <input
@@ -139,9 +143,9 @@ const JournalNote = () => {
             name="method"
           />
           <label>Was it worth the read?</label>
-          <textarea
+          <input
             type="text"
-            className="box box-large"
+            className="box"
             value={journalNote.worthit}
             onChange={handleChange}
             id="worthit"

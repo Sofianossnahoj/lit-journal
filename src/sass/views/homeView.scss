@@ -4,8 +4,7 @@
 .home-view {
   @include card;
   text-align: -webkit-center;
-  height: 100%;
-  width: 100%;
+  min-height: 85%;
 
   .hr {
     @include hr;
