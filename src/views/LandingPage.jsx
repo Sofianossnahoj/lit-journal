@@ -1,9 +1,9 @@
-import "../sass/views/landingPage.scss";
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectUser } from "../features/userSlice";
 import Header from "../components/header";
 import SignIn from "../components/SignIn";
+import "../sass/views/landingPage.scss";
 
 function LandingPage() {
   const currentUser = useSelector(selectUser);
@@ -15,7 +15,7 @@ function LandingPage() {
   return (
     <main className="landing-page">
       <section className="content-box">
-        <h3>Welcome to</h3>
+        <h2>Welcome to</h2>
         <Header />
         <SignIn />
       </section>

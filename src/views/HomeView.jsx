@@ -1,10 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../sass/views/homeView.scss";
-
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
-import { selectUser } from "../features/userSlice";
 import db from "../firebase/firebase";
 import {
   collection,
@@ -13,41 +8,32 @@ import {
   doc,
   deleteDoc,
 } from "@firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { setEntries, getEntries, deleteEntry } from "../features/entriesSlice";
+import { selectUser } from "../features/userSlice";
 import SearchBar from "../components/SearchBar";
 import MenuBar from "../components/MenuBar";
+import "../sass/views/homeView.scss";
 
 function HomeView() {
+  const [isVisible, setIsVisible] = useState(false);
   const entries = useSelector(getEntries);
   const currentUser = useSelector(selectUser);
-  const [isVisible, setIsVisible] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const usersEntries = async () => {
-    // console.log("logs currentuser: ", currentUser);
-    // const auth = getAuth();
-    // const user = auth.currentUser;
     if (currentUser !== null) {
       const uid = currentUser.uid;
       const entryQuery = query(collection(db, `users/${uid}/journal-notes`));
-      /* console.log(entryQuery); */
       const querySnapshot = await getDocs(entryQuery);
       const data = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-
       dispatch(setEntries(data));
-
-      // setEntries(data);
-      // console.log(data);
-      // console.log(entries);
     }
-    // let currentUserId = firebase.auth().currentUser;
-    // setCurrentUser(currentUserId);
-
-    // console.log(entries);
   };
 
   useEffect(() => {
@@ -72,40 +58,56 @@ function HomeView() {
       <div onSubmit={navigateToSearch}>
         <SearchBar />
       </div>
+      <h3>Your Entries</h3>
 
       {entries.length > 0 ? (
-        <span>
+        <span className="note-list">
           {entries.map((note, id) => {
-            // console.log("logs val in template map", val.id);
             return (
               <article key={id} className="note-container">
                 <section className="note-collapsed">
-                  <label className="note-label">Title</label>
-                  <p className="note-text">{note.title}</p>
-                  <label className="note-label">Author</label>
-                  <p className="note-text">{note.author}</p>
-                  <label className="note-label">Genre</label>
-                  <p className="note-text">{note.genre}</p>
-                  <label className="note-label">Method</label>
-                  <p className="note-text">{note.method}</p>
+                  <div className={note.image ? "note-with-image" : ""}>
+                    {note.image ? (
+                      <img
+                        src={note.image}
+                        alt="Book Cover"
+                        className="image"
+                      />
+                    ) : (
+                      <p />
+                    )}
+
+                    <div>
+                      <label className="note-label">Title</label>
+                      <p className="note-text">{note.title}</p>
+                      <label className="note-label">Author</label>
+                      <p className="note-text">{note.author}</p>
+                    </div>
+                  </div>
                 </section>
                 {isVisible ? (
-                  <section className="">
+                  <section>
+                    <label className="note-label">Genre</label>
+                    <p className="note-text">{note.genre}</p>
+                    <label className="note-label">Method</label>
+                    <p className="note-text-extended">{note.method}</p>
                     <label className="note-label">Was it worth the read?</label>
-                    <p className="note-text">{note.worthit}</p>
+                    <p className="note-text-extended">{note.worthit}</p>
                     <label className="note-label">Favorite chapter</label>
-                    <p className="note-text">{note.favoriteChapter}</p>
+                    <p className="note-text-extended">{note.favoriteChapter}</p>
                     <label className="note-label">Favorite character</label>
-                    <p className="note-text">{note.favoriteCharacter}</p>
+                    <p className="note-text-extended">
+                      {note.favoriteCharacter}
+                    </p>
                     <label className="note-label">
                       Sequel, will you read it?
                     </label>
-                    <p className="note-text">{note.sequel}</p>
+                    <p className="note-text-extended">{note.sequel}</p>
                     <label className="note-label">Quotes</label>
-                    <p className="note-text">{note.quotes}</p>
+                    <p className="note-text-extended">{note.quotes}</p>
                   </section>
                 ) : (
-                  <p></p>
+                  <p />
                 )}
                 <section className="note-button">
                   <button
@@ -139,14 +141,6 @@ function HomeView() {
           </Link>
         </section>
       )}
-
-      {/* <section className="message-no-entries">
-        <h3>You don't have any journal entries yet!</h3>
-
-        <Link to="/create">
-          <button>Create New Entry</button>
-        </Link>
-      </section> */}
       <MenuBar />
     </main>
   );

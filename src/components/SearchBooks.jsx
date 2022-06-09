@@ -1,6 +1,4 @@
 import { useEffect } from "react";
-import "../sass/components/searchBooks.scss";
-import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   selectAllBooks,
@@ -8,8 +6,10 @@ import {
   getBooksError,
   fetchBooks,
 } from "../features/booksSlice";
+import { useSelector, useDispatch } from "react-redux";
 import { setBookData } from "../features/bookEntrySlice";
 import SearchBar from "./SearchBar";
+import "../sass/components/searchBooks.scss";
 
 const SearchBooks = () => {
   const dispatch = useDispatch();
@@ -50,15 +50,17 @@ const SearchBooks = () => {
           />
         )}
         <div>
-          <h4 className="search-title">{book.title}</h4>
+          <h3 className="search-title">{book.title}</h3>
           <p className="search-authors">{book.authors}</p>
           <button
             onClick={(event) => {
               event.stopPropagation();
-              createNote(book)
+              createNote(book);
             }}
             className="create-note-button"
-          >Create New Note</button>
+          >
+            Create New Note
+          </button>
         </div>
       </section>
     </main>

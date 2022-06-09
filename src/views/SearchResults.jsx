@@ -1,6 +1,6 @@
-import "../sass/views/searchResults.scss";
 import SearchBooks from "../components/SearchBooks";
 import MenuBar from "../components/MenuBar";
+import "../sass/views/searchResults.scss";
 
 const SearchResults = () => {
   return (

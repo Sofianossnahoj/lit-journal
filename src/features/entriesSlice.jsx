@@ -4,11 +4,11 @@ import produce from "immer";
 export const entriesSlice = createSlice({
   name: "entriesState",
   initialState: {
-    entries: []
+    entries: [],
   },
   reducers: {
     setEntries: (state, action) => {
-     state.entries = action.payload;
+      state.entries = action.payload;
     },
     createEntry: (state, action) => {
       const newEntry = produce(state, (draftEntry) => {
@@ -17,13 +17,12 @@ export const entriesSlice = createSlice({
       return newEntry;
     },
     deleteEntry: (state, action) => {
-        const removeEntry = produce(state, (draftDelete) => {
+      const removeEntry = produce(state, (draftDelete) => {
         draftDelete.entries.slice(action.payload);
-        });
-      return removeEntry
-    }
-  }
-  /* editEntry */
+      });
+      return removeEntry;
+    },
+  },
 });
 
 export const getEntries = (state) => state.entriesState.entries;

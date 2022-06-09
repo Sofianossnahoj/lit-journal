@@ -9,7 +9,6 @@ import { entryInfo } from "../features/bookEntrySlice";
 
 const JournalNote = () => {
   const bookData = useSelector(entryInfo);
-
   const [journalNote, setJournalNote] = useState({
     title: bookData ? bookData.title : "",
     author: bookData ? bookData.authors : "",
@@ -20,15 +19,11 @@ const JournalNote = () => {
     favoriteChapter: "",
     sequel: "",
     quotes: "",
+    image: bookData.imageUrl ? bookData.imageUrl.thumbnail : "",
   });
 
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
-
-  /* console.log(bookData);
-  console.log(bookData.id);
-  console.log(bookData.title); */
-
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -40,7 +35,6 @@ const JournalNote = () => {
 
   const handleSubmit = async () => {
     const q = query(collection(db, "users"));
-    //console.log("handleSub curentUser: ", currentUser);
     const userId = currentUser.uid;
     const querySnapshot = await getDocs(q);
     const queryData = querySnapshot.docs.map((journalNote) => ({
@@ -57,36 +51,33 @@ const JournalNote = () => {
       favoriteChapter: journalNote.favoriteChapter,
       sequel: journalNote.sequel,
       quotes: journalNote.quotes,
+      image: journalNote.image,
     };
-    console.log(newEntryData);
-    // Async await skapar eventuellt problem, vid inloggning eftersom
-    // journal notes inte finns vid initial rendering rad 63-67
-    console.log("index of: ", userId, db, journalNote.title);
     queryData.map(async () => {
       await setDoc(
-        // doc(
-        //   db
-        //     .collection("users")
-        //     .document(`${userId}`)
-        //     .collection("journal-notes")
-        //     .document(journalNote.title)
-        // ),
-        // newEntryData
         doc(db, `users/${userId}/journal-notes`, journalNote.title),
         newEntryData
       );
     });
-    console.log("journalNote.title", journalNote.method);
-    console.log("journalNote", journalNote);
+
     dispatch(createEntry(newEntryData));
     navigate("/home", { replace: true });
   };
 
   return (
     <section className="card">
-      <h2>Create a journal note</h2>
-      <form className="form-new-entry" onSubmit={(e) => e.preventDefault()}>
+      <h3>Create a journal note</h3>
+      <form
+        className="form-new-entry"
+        onSubmit={(e) => e.preventDefault()}
+        autoComplete="off"
+      >
         <section className="form-section-top">
+          {journalNote.image ? (
+            <img src={journalNote.image} alt="Book Cover" className="image" />
+          ) : (
+            <p />
+          )}
           <label>Title</label>
           {!bookData.title ? (
             <input
@@ -98,7 +89,11 @@ const JournalNote = () => {
               name="title"
             />
           ) : (
-            <p onChange={handleChange} value={journalNote.title}>
+            <p
+              onChange={handleChange}
+              value={journalNote.title}
+              className="box"
+            >
               {bookData.title}
             </p>
           )}
@@ -113,7 +108,9 @@ const JournalNote = () => {
               name="author"
             />
           ) : (
-            <p value={journalNote.author}>{bookData.authors}</p>
+            <p value={journalNote.author} className="box">
+              {bookData.authors}
+            </p>
           )}
           <label>Genre</label>
           <input
@@ -127,11 +124,6 @@ const JournalNote = () => {
         </section>
         <section className="form-section-bottom">
           <label>Method</label>
-          {/*<select className="box" id="method" name="method">
-            <option value="book">Book</option>
-            <option value="audio-book">Audio Book</option>
-            <option value="e-book">E-book</option>
-          </select> */}
           <input
             type="text"
             className="box"
@@ -141,9 +133,9 @@ const JournalNote = () => {
             name="method"
           />
           <label>Was it worth the read?</label>
-          <textarea
+          <input
             type="text"
-            className="box box-large"
+            className="box"
             value={journalNote.worthit}
             onChange={handleChange}
             id="worthit"
