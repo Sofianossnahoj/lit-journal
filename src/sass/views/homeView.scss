@@ -1,0 +1,84 @@
+@import "../mixins";
+@import "../variables";
+
+.home-view {
+  @include card;
+  text-align: -webkit-center;
+  min-height: 85%;
+
+  .hr {
+    @include hr;
+  }
+
+  .note-list {
+    height: inherit;
+  }
+  .image {
+    margin-top: 0.5em;
+    width: 40%;
+    height: 40%;
+  }
+  .note-container {
+    margin-top: 2em;
+    padding: 0.5em;
+    text-align: left;
+    border-radius: 2px;
+    background-color: $white;
+    width: 90%;
+    @include card;
+
+    .note-text {
+      background-color: $cremeWhite;
+      border-radius: 2px;
+      margin-left: 1rem;
+      width: 100%;
+    }
+
+    .note-text-extended {
+      background-color: $cremeWhite;
+      border-radius: 2px;
+      margin-left: 1rem;
+      width: 90%;
+    }
+    .note-label {
+      margin-left: 1rem;
+    }
+    .note-collapsed {
+      height: fit-content;
+      width: 90%;
+
+      .note-with-image {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+    }
+  }
+
+  .message-no-entries {
+    @include card;
+    height: 50%;
+    justify-content: center;
+  }
+  .note-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    .note-button-icon {
+      border-bottom: none;
+      .icon {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+
+  button {
+    @include button;
+    background-color: transparent;
+    color: $darkGrey;
+    border-bottom: solid 2px $darkGrey;
+    border-radius: 0px;
+    margin-bottom: 0.75em;
+  }
+}

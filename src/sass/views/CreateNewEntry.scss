@@ -1,0 +1,10 @@
+@import "../mixins";
+@import "../variables";
+
+.create-new-entry {
+  @include card;
+  text-align: -webkit-center;
+  .hr {
+    @include hr;
+  }
+}

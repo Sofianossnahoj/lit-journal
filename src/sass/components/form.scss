@@ -1,0 +1,69 @@
+@import "../mixins";
+@import "../variables";
+
+.card {
+  width: 100%;
+  height: 100%;
+}
+
+.form-new-entry {
+  margin-top: 2em;
+  padding: 0.5em;
+  text-align: left;
+  border-radius: 2px;
+  background-color: $white;
+  width: 90%;
+  @include card;
+  .image {
+    width: 40%;
+  }
+}
+
+.form-section-top,
+.form-section-bottom {
+  height: fit-content;
+  @include card;
+  width: 100%;
+  margin-left: 1rem;
+
+  .box {
+    width: 90%;
+    border-style: none;
+    height: 1.5rem;
+    margin-top: 0.3rem;
+    background-color: $cremeWhite;
+    @include box-shadow;
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+  }
+  .button-save {
+    @include button;
+    @include box-shadow;
+    align-self: center;
+    width: 30%;
+    height: 2.5rem;
+    font-size: 100%;
+    margin: 1.5rem;
+  }
+
+  .box-large {
+    width: 90%;
+    height: 4rem;
+  }
+}
+
+.form-section-top {
+  .box {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+  }
+}
+
+label {
+  max-width: 80%;
+  margin-top: 0.75rem;
+}
+
+textarea {
+  resize: none;
+}

@@ -1,0 +1,50 @@
+@import "../mixins";
+@import "../variables";
+
+.search-books {
+  min-height: 85%;
+
+  .search-result {
+    background-color: $white;
+    margin: 0.75em;
+    padding: 0.75em;
+    text-align: right;
+  }
+
+  .book-list-card {
+    display: grid;
+    gap: 1em;
+    grid-template-areas:
+      "image title"
+      "image authors"
+      "image button";
+  }
+
+  .search-image {
+    grid-area: image;
+    height: 160px;
+    width: 120px;
+  }
+
+  .no-search-image {
+    grid-area: image;
+    background-color: $lightBeige;
+    height: 160px;
+    width: 120px;
+    text-align: center;
+  }
+
+  .search-title {
+    grid-area: title;
+    text-align: right;
+  }
+
+  .search-authors {
+    grid-area: authors;
+  }
+
+  .create-note-button {
+    @include button;
+    grid-area: button;
+  }
+}

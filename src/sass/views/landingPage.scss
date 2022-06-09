@@ -1,0 +1,26 @@
+@import "../mixins";
+@import "../variables";
+
+.landing-page {
+  @include card;
+  width: 100vw;
+  height: 100vh;
+  background-color: $lightBeige;
+
+  .content-box {
+    @include box-shadow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 80%;
+    width: 85%;
+    margin: 3em auto;
+    padding-top: 5em;
+    background-color: $lightBeige;
+
+    h4 {
+      margin-bottom: 1em;
+    }
+  }
+}
